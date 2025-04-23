@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://ci688oit7hnud"]
+
+[ext_resource type="Script" path="res://main_world.gd" id="1_67rwd"]
+[ext_resource type="PackedScene" uid="uid://b0qlav8kioxof" path="res://char.tscn" id="1_qkqsl"]
+[ext_resource type="PackedScene" uid="uid://bgjt01tgm1ly2" path="res://test.tscn" id="2_y4qpj"]
+
+[node name="main" type="Node3D"]
+script = ExtResource("1_67rwd")
+
+[node name="spr" type="Sprite3D" parent="."]
+
+[node name="Node2D" parent="." instance=ExtResource("2_y4qpj")]
+
+[node name="character" parent="." instance=ExtResource("1_qkqsl")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.668962, 0.743297, 0, -0.743297, 0.668962, -3.5838, 14.2574, 25.6265)

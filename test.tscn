@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgjt01tgm1ly2"]
+
+[ext_resource type="Shader" path="res://circleshadow.gdshader" id="1_4wtn4"]
+[ext_resource type="Script" path="res://map.gd" id="1_fwftn"]
+[ext_resource type="Script" path="res://chader.gd" id="2_l72ha"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f3bsw"]
+shader = ExtResource("1_4wtn4")
+shader_parameter/value = 1.0
+
+[node name="Node2D" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fwftn")
+
+[node name="progress" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 332.0
+offset_bottom = 84.0
+step = 0.001
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Node2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Cam" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="InGameMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="spr" type="TextureRect" parent="InGameMenu"]
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 324.0
+
+[node name="CircleShadow" type="ColorRect" parent="InGameMenu"]
+light_mask = 2
+visibility_layer = 2
+material = SubResource("ShaderMaterial_f3bsw")
+layout_mode = 0
+script = ExtResource("2_l72ha")

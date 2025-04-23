@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0qlav8kioxof"]
+
+[ext_resource type="Script" path="res://char.gd" id="1_y827d"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lkb2e"]
+
+[sub_resource type="Sky" id="Sky_2dxch"]
+sky_material = SubResource("ProceduralSkyMaterial_lkb2e")
+
+[sub_resource type="Environment" id="Environment_ocrix"]
+background_mode = 2
+sky = SubResource("Sky_2dxch")
+
+[node name="character" type="Camera3D"]
+environment = SubResource("Environment_ocrix")
+current = true
+near = 0.001
+script = ExtResource("1_y827d")
