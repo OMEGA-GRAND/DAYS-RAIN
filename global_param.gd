@@ -6,6 +6,7 @@ var debug_label = Label.new()
 var window_size
 
 
+
 func _ready():
 	add_child(debug_control)
 	debug_control.add_child(debug_label)

@@ -50,9 +50,10 @@ var zone = CollisionShape3D.new()
 var shap = BoxShape3D.new()
 var area = Area3D.new()
 
+
 func _ready():
 	zone.set_shape(shap)
-	zone.shape.size = Vector3(5,5,5)
+	zone.shape.size = Vector3(4.95,4.95,4.95)
 	add_child(area)
 	area.add_child(zone)
 	que = name.split(", ", true, 3)
@@ -73,8 +74,6 @@ func _process(_delta):
 		a.albedo_color = Color(0, 0.373, 0.824)
 		cube[i].set_material(a)
 		add_child(cube[i])
-		
-	
 	pass
 func _process(_delta):
 	pass

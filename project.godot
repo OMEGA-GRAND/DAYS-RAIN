@@ -21,7 +21,6 @@ run/delta_smoothing=false
 [autoload]
 
 GlobalParam="*res://global_param.gd"
-Chanks="*res://chanks.gd"
 
 [debug]
 
