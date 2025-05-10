@@ -6,10 +6,10 @@ var kk = false
 
 func _process(_delta):
 	size = DisplayServer.window_get_size()
-	if Input.is_action_just_pressed("2nd_side_mouse"):
+	if Input.is_action_just_pressed("2nd_side_mouse") or Input.is_action_just_pressed("Э"):
 		if kk == false:
 			kk = true
-	if Input.is_action_just_pressed("1st_side_mouse"):
+		else:
 			kk = false
 	if kk == true:
 		material.set_shader_parameter("value", k)

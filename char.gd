@@ -4,6 +4,7 @@ var time = 0
 var mouse_pos = Vector2(0,0)
 var move_speed: float = 10.0
 var mouse_sensitivity: float = 0.3
+var kk = false
 
 func _ready():
 	# Захват мыши
@@ -18,12 +19,18 @@ func _input(event):
 
 func _process(delta):
 	time = delta
-	if Input.is_action_just_pressed("1st_side_mouse"):
-		mouse_sensitivity = 0.3
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	if Input.is_action_just_pressed("2nd_side_mouse"):
+	if kk == true:
 		mouse_sensitivity = 0.09
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		mouse_sensitivity = 0.3
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if Input.is_action_just_pressed("2nd_side_mouse") or Input.is_action_just_pressed("Э"):
+		if kk == false:
+			kk = true
+		else:
+			kk = false
+
 	
 	# Создаём Vector3, где каждая компонента задаётся через get_axis
 	var dir = Vector3(
