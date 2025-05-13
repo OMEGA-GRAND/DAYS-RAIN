@@ -27,6 +27,14 @@ offset_right = 332.0
 offset_bottom = 84.0
 step = 0.001
 
+[node name="debug" type="RichTextLabel" parent="progress"]
+layout_mode = 0
+offset_top = 48.0
+offset_right = 693.0
+offset_bottom = 455.0
+bbcode_enabled = true
+scroll_following = true
+
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="TextureRect" type="TextureRect" parent="Node2D"]
