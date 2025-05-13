@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b0qlav8kioxof"]
 
-[ext_resource type="Script" path="res://char.gd" id="1_y827d"]
+[ext_resource type="Script" path="res://core/logic/char.gd" id="1_y827d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lkb2e"]
 

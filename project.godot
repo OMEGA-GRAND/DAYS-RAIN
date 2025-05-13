@@ -20,7 +20,7 @@ run/delta_smoothing=false
 
 [autoload]
 
-GlobalParam="*res://global_param.gd"
+GlobalParam="*res://core/logic/global_param.gd"
 
 [debug]
 
