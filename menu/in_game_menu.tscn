@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://bhuwtv3rysx8d"]
+
+[ext_resource type="Script" path="res://menu/IGM.gd" id="1_1m0wi"]
+[ext_resource type="Shader" path="res://menu/circleshadow.gdshader" id="2_nossb"]
+[ext_resource type="Script" path="res://menu/shadowShader.gd" id="3_p11o5"]
+[ext_resource type="Texture2D" uid="uid://b23le1isag0bh" path="res://menu/menu.png" id="4_t6ln0"]
+[ext_resource type="Shader" path="res://menu/start.gdshader" id="5_4qf1y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f3bsw"]
+shader = ExtResource("2_nossb")
+shader_parameter/value = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nult5"]
+shader = ExtResource("5_4qf1y")
+shader_parameter/value = 1.0
+
+[node name="InGameMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_1m0wi")
+
+[node name="CircleShadow" type="ColorRect" parent="."]
+unique_name_in_owner = true
+light_mask = 2
+visibility_layer = 2
+material = SubResource("ShaderMaterial_f3bsw")
+layout_mode = 0
+script = ExtResource("3_p11o5")
+
+[node name="Menu" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(585, 298)
+texture = ExtResource("4_t6ln0")
+
+[node name="ShadowOnStart" type="ColorRect" parent="."]
+light_mask = 2
+visibility_layer = 2
+material = SubResource("ShaderMaterial_nult5")
+layout_mode = 0
+offset_right = 124.0
+offset_bottom = 206.0

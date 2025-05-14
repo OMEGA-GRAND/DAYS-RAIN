@@ -17,6 +17,7 @@ var progress = (((float(sizi.x) / float(square_size.x) * (float(sizi.y) / float(
 var flow_deb_text : String
 @onready var efw : Array = [{"name" : ""}, {"name_property" : ""}, {"typed_value" : null}, {"type_of_math_operatin" : ""}]:
 	set = set_get
+@onready var buttom = $Button
 @onready var deb = $progress/debug
 
 
@@ -101,6 +102,9 @@ func _ready():
 	
 
 func _process(_delta):
+	buttom.position = GlobalParam.debug_label.position
+	buttom.size = Vector2i(30,30)
+
 	mutex.lock()
 	if flow_deb_text.split("[p]").size() >= 7:
 		deb.set_text(
@@ -131,7 +135,7 @@ func _process(_delta):
 	q = clamp(q, 0.0, 100.0)
 	$progress.value = q
 	$progress.position = GlobalParam.debug_control.position + Vector2(0,30)
-	$InGameMenu/spr.position += Input.get_vector("ui_right", "ui_left", "ui_down", "ui_up") * 3
+	$spr.position += Input.get_vector("ui_right", "ui_left", "ui_down", "ui_up") * 3
 	if Input.is_action_just_pressed("Ctrl"):
 		efw = ["progress", "visible", true]
 		if i == false:
@@ -171,9 +175,14 @@ func _process(_delta):
 			mutex.lock()
 			flow_deb_text += str("[p]				[color=red][bgcolor=black]ГЕНЕРАЦИЯ УЖЕ ЗАПУЩЕНА![/bgcolor][/color]				")
 			mutex.unlock()
-			
+
+func _button_pressed():
+	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
 func _generate_square(x, y, id):
-	
 	print_rich("[color=red][bgcolor=black]№", id.get_id(), "[/bgcolor][/color]  [color=green]x=", x, ", y=", y, "[/color]  1. Начата работа.")
 	mutex.lock()
 	flow_deb_text += str("[p][color=green]x=", x, ", y=", y, "[/color] [color=red][bgcolor=black]№", id.get_id(), "[/bgcolor][/color] Начата работа.")
@@ -282,7 +291,7 @@ func _assemble_image():
 	
 	# Преобразуем изображение в текстуру
 	var texture = ImageTexture.create_from_image(final_image)
-	$InGameMenu/spr.texture = texture
+	$spr.texture = texture
 	final_image.save_png("res://menu/noise.png")
 	print_rich("Текстура успешно применена к TextureRect.")
 	i = false

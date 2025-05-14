@@ -18,9 +18,11 @@ func _ready():
 	start_label.set_as_top_level(true)
 	ProjectSettings.set_as_basic("network/limits/debugger/max_chars_per_second", true)
 	print(ProjectSettings.get_setting("network/limits/debugger/max_chars_per_second"))
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 	
 func _process(_delta):
 	Engine.max_fps = FPS
+	
 	if k == false:
 		if get_viewport().get_camera_3d():
 			window_size = Vector2(get_viewport_transform()[0].x, get_viewport_transform()[1].y) + get_viewport_rect().size / 100
