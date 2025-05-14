@@ -14,9 +14,11 @@ var q : float
 var i = false
 var nod = CSGSphere3D.new()
 var progress = (((float(sizi.x) / float(square_size.x) * (float(sizi.y) / float(square_size.y))) * 7) + 8) / 100000
+var flow_deb_text : String
 @onready var efw : Array = [{"name" : ""}, {"name_property" : ""}, {"typed_value" : null}, {"type_of_math_operatin" : ""}]:
 	set = set_get
 @onready var deb = $progress/debug
+
 
 func set_get(val : Array):
 	if val.size() == 2:
@@ -92,11 +94,40 @@ func set_get(val : Array):
 
 func _ready():
 	efw = ["progress", "visible", false]
+	FileAccess.file_exists("res://*..*/gen_log.txt")
+	
 	pass
 	
 	
 
 func _process(_delta):
+	mutex.lock()
+	if flow_deb_text.split("[p]").size() >= 7:
+		deb.set_text(
+			flow_deb_text.right(
+				(
+				flow_deb_text.split("[p]")[flow_deb_text.split("[p]").size() - 1].length() + 3 
+				+
+				flow_deb_text.split("[p]")[flow_deb_text.split("[p]").size() - 2].length() + 3 
+				+
+				flow_deb_text.split("[p]")[flow_deb_text.split("[p]").size() - 3].length() + 3 
+				+
+				flow_deb_text.split("[p]")[flow_deb_text.split("[p]").size() - 4].length() + 3 
+				+
+				flow_deb_text.split("[p]")[flow_deb_text.split("[p]").size() - 5].length() + 3 
+				+
+				flow_deb_text.split("[p]")[flow_deb_text.split("[p]").size() - 6].length() + 3 
+				+
+				flow_deb_text.split("[p]")[flow_deb_text.split("[p]").size() - 7].length() + 3 
+				)
+			)
+		)
+	else:
+		deb.set_text(
+			flow_deb_text.left(100)
+			)
+	mutex.unlock()
+	
 	q = clamp(q, 0.0, 100.0)
 	$progress.value = q
 	$progress.position = GlobalParam.debug_control.position + Vector2(0,30)
@@ -110,7 +141,9 @@ func _process(_delta):
 				print_rich("Попытка установить разрешение сверх опасного. Теперь оно равно: ", sizi)
 				
 			print_rich("Начало выполнения программы.")
-			deb.append_text(str("Начало... [p]"))
+			mutex.lock()
+			flow_deb_text += str("[p]Начало... ")
+			mutex.unlock()
 			# Настройка FastNoiseLite
 			a.noise_type					= FastNoiseLite.TYPE_VALUE_CUBIC
 			a.seed							= randi()
@@ -125,7 +158,9 @@ func _process(_delta):
 			for x in range(sizi.x / square_size.x):
 				for y in range(sizi.y / square_size.y):
 					print_rich("[color=green]x=", x, ", y=", y, "[/color]  Запуск потока... ")
-					deb.append_text(str("[color=green]x=", x, ", y=", y, "[/color]  Запуск потока... [p]"))
+					mutex.lock()
+					flow_deb_text += str("[p][color=green]x=", x, ", y=", y, "[/color]  Запуск потока... ")
+					mutex.unlock()
 					q += progress
 					var thread = Thread.new()
 					threads.append(thread)
@@ -133,12 +168,16 @@ func _process(_delta):
 					thread.start(Callable(self, "_generate_square").bind(x, y, thread), Thread.PRIORITY_NORMAL)
 		else:
 			printerr("				ГЕНЕРАЦИЯ УЖЕ ЗАПУЩЕНА!				")
-			deb.append_text(str("				[color=red][bgcolor=black]ГЕНЕРАЦИЯ УЖЕ ЗАПУЩЕНА![/bgcolor][/color]				[p]"))
-
+			mutex.lock()
+			flow_deb_text += str("[p]				[color=red][bgcolor=black]ГЕНЕРАЦИЯ УЖЕ ЗАПУЩЕНА![/bgcolor][/color]				")
+			mutex.unlock()
+			
 func _generate_square(x, y, id):
 	
 	print_rich("[color=red][bgcolor=black]№", id.get_id(), "[/bgcolor][/color]  [color=green]x=", x, ", y=", y, "[/color]  1. Начата работа.")
-	deb.append_text(str("[color=green]x=", x, ", y=", y, "[/color] [color=red][bgcolor=black]№", id.get_id(), "[/bgcolor][/color] Начата работа."))
+	mutex.lock()
+	flow_deb_text += str("[p][color=green]x=", x, ", y=", y, "[/color] [color=red][bgcolor=black]№", id.get_id(), "[/bgcolor][/color] Начата работа.")
+	mutex.unlock()
 	q += progress
 	# Создание локальной копии FastNoiseLite
 	var local_noise							= FastNoiseLite.new()
@@ -180,12 +219,15 @@ func _generate_square(x, y, id):
 	# Увеличиваем счётчик завершённых потоков
 	completed_threads += 1
 	print_rich("[color=red][bgcolor=black]№", id.get_id(), "[/bgcolor][/color]  [color=green]x=", x, ", y=", y, "[/color]  7. Завершён, всего завершено = ", completed_threads)
-	deb.append_text(str("[color=green]x=", x, ", y=", y, "[/color] [color=red][bgcolor=black]№", id.get_id(), "[/bgcolor][/color] Завершён, всего завершено = ", completed_threads, "[p]"))
+	mutex.lock()
+	flow_deb_text += str("[color=green]x=", x, ", y=", y, "[/color] [color=red][bgcolor=black]№", id.get_id(), "[/bgcolor][/color] Завершён, всего завершено = ", completed_threads)
+	mutex.unlock()
 	q += progress
 	
 	if completed_threads == (sizi.x / square_size.x) * (sizi.y / square_size.y):
 		completed_threads = 0
-		deb.clear()
+		
+		flow_deb_text = ""
 		print_rich("Потоки завершены. Вызов _assemble_image()...")
 		print_rich("Просмотр потоков, запуск _check_threads()...")
 		call_deferred("_check_threads")
@@ -193,7 +235,7 @@ func _generate_square(x, y, id):
 		q += progress
 
 func _check_threads():
-	
+	deb.clear()
 	var check = []
 	for x in threads:
 		check.append(str("Поток: №", x.get_id(), " Активен? : ", x.is_alive()))

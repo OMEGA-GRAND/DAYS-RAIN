@@ -3,7 +3,7 @@ var FPS = ((func(): if DisplayServer.screen_get_refresh_rate() == -1: return 60 
 var mFPS = FPS / 4
 var debug_control = Control.new()
 var debug_label = Label.new()
-var start_label = Label.new()
+var start_label = RichTextLabel.new()
 var window_size
 var kk := false
 var k := false
@@ -16,7 +16,8 @@ func _ready():
 	debug_control.set_as_top_level(true)
 	add_child(start_label)
 	start_label.set_as_top_level(true)
-	
+	ProjectSettings.set_as_basic("network/limits/debugger/max_chars_per_second", true)
+	print(ProjectSettings.get_setting("network/limits/debugger/max_chars_per_second"))
 	
 func _process(_delta):
 	Engine.max_fps = FPS
@@ -26,7 +27,9 @@ func _process(_delta):
 		if get_viewport().get_camera_2d():
 			window_size = get_viewport().get_camera_2d().position - (get_viewport().get_camera_2d().get_viewport_rect().size / 2.05)
 		start_label.position = window_size
-		start_label.text = """Для открытия и закрытия debugmenu нажимай кнопку Shift.
+		start_label.size = Vector2i(1000, 1000)
+		start_label.bbcode_enabled = true
+		start_label.set_text(str("""Для открытия и закрытия debugmenu нажимай кнопку Shift.
 		
 		Что бы сэмитировать открытие внутриигрового меню - нажми дальнюю боковую кнопку мыши.
 		||| Если у тебя на мышке нет боковых кнопок - нажми русскую "Э".
@@ -36,7 +39,9 @@ func _process(_delta):
 		||| По окончанию генерации на весь экран будет показана картинка. 
 		||| Картинку можно будет двигать стрелочками на клавиатуре.
 		
-		Что бы убрать эту подсказку - открой denugmenu."""
+		Что бы убрать эту подсказку - открой denugmenu.
+		[color=green][bgcolor=black]DEBUG: limitOutput: """, ProjectSettings.get_setting("network/limits/debugger/max_chars_per_second"), " V-Sync: ", DisplayServer.window_get_vsync_mode(), " (0=False, 1=True)" ,"[/bgcolor][/color]"))
+
 		if Input.is_action_just_pressed("Shift"):
 			start_label.queue_free()
 			k = true
