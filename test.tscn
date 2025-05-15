@@ -39,11 +39,3 @@ scroll_following = true
 position = Vector2(576, 324)
 
 [node name="InGameMenu" parent="." instance=ExtResource("2_5af5r")]
-
-[node name="Button" type="CheckButton" parent="."]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-button_mask = 0
-
-[connection signal="pressed" from="Button" to="." method="_button_pressed"]

@@ -5,6 +5,7 @@ var debug_control = Control.new()
 var debug_label = Label.new()
 var start_label = RichTextLabel.new()
 var window_size
+var center
 var kk := false
 var k := false
 
@@ -22,12 +23,16 @@ func _ready():
 	
 func _process(_delta):
 	Engine.max_fps = FPS
+	if get_viewport().get_camera_3d():
+		window_size = Vector2(get_viewport_transform()[0].x, get_viewport_transform()[1].y) + get_viewport_rect().size / 10
+		center = Vector2(get_viewport_transform()[0].x, get_viewport_transform()[1].y)
+	if get_viewport().get_camera_2d():
+		window_size = get_viewport().get_camera_2d().position - (get_viewport().get_camera_2d().get_viewport_rect().size / 2)
+		center = get_viewport().get_camera_2d().position 
+	
+	
 	
 	if k == false:
-		if get_viewport().get_camera_3d():
-			window_size = Vector2(get_viewport_transform()[0].x, get_viewport_transform()[1].y) + get_viewport_rect().size / 100
-		if get_viewport().get_camera_2d():
-			window_size = get_viewport().get_camera_2d().position - (get_viewport().get_camera_2d().get_viewport_rect().size / 2.05)
 		start_label.position = window_size
 		start_label.size = Vector2i(1000, 1000)
 		start_label.bbcode_enabled = true
@@ -55,12 +60,8 @@ func _process(_delta):
 	if kk == false:
 		debug_control.visible = false
 	if kk == true:
-		if get_viewport().get_camera_3d():
-			window_size = Vector2(get_viewport_transform()[0].x, get_viewport_transform()[1].y) + get_viewport_rect().size / 100
-		if get_viewport().get_camera_2d():
-			window_size = get_viewport().get_camera_2d().position - (get_viewport().get_camera_2d().get_viewport_rect().size / 2.05)
-			debug_label.text = str("Текущий MAXFPS[", Engine.max_fps ,"]   Уст.MAXFPS[", FPS, "]   MINFPS[", mFPS, "]   Ваш текущий FPS[", Engine.get_frames_per_second(),"]")
-			debug_control.position = window_size
-			debug_control.visible = true
+		debug_label.text = str("Текущий MAXFPS[", Engine.max_fps ,"]   Уст.MAXFPS[", FPS, "]   MINFPS[", mFPS, "]   Ваш текущий FPS[", Engine.get_frames_per_second(),"]")
+		debug_control.position = window_size
+		debug_control.visible = true
 	
 

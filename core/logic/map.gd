@@ -102,9 +102,12 @@ func _ready():
 	
 
 func _process(_delta):
-	buttom.position = GlobalParam.debug_label.position
-	buttom.size = Vector2i(30,30)
-
+	if Input.is_action_just_pressed("Q"):
+		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	
 	mutex.lock()
 	if flow_deb_text.split("[p]").size() >= 7:
 		deb.set_text(
@@ -176,11 +179,6 @@ func _process(_delta):
 			flow_deb_text += str("[p]				[color=red][bgcolor=black]ГЕНЕРАЦИЯ УЖЕ ЗАПУЩЕНА![/bgcolor][/color]				")
 			mutex.unlock()
 
-func _button_pressed():
-	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
-	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 func _generate_square(x, y, id):
 	print_rich("[color=red][bgcolor=black]№", id.get_id(), "[/bgcolor][/color]  [color=green]x=", x, ", y=", y, "[/color]  1. Начата работа.")
