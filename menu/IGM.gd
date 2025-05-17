@@ -2,6 +2,7 @@ extends Control
 
 @onready var shade = %CircleShadow
 @onready var menu = %Menu
+@onready var IcH = %IconHolder
 var start
 var key
 var k = 1.0
