@@ -7,7 +7,7 @@ void fragment() {
     float dist = distance(UV, center);
     
     // Применение радиального градиента
-    float alpha = smoothstep(0.1, 0.8, dist); // Значения 0.6 и 0.7 определяют зону перехода
+    float alpha = smoothstep(0.05, 0.8, dist); // Значения 0.6 и 0.7 определяют зону перехода
     
     // Установка цвета с альфа-каналом
     COLOR = vec4(vec3(0.0), alpha  * value); // Чёрный цвет с изменяющейся прозрачностью

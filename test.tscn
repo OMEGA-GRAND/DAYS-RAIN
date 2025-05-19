@@ -16,8 +16,9 @@ script = ExtResource("1_fwftn")
 
 [node name="spr" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 576.0
-offset_bottom = 324.0
+offset_right = 564.0
+offset_bottom = 327.0
+pivot_offset = Vector2(282, 163)
 
 [node name="progress" type="ProgressBar" parent="."]
 layout_mode = 0

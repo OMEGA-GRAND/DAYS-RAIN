@@ -126,6 +126,10 @@ Q={
 
 locale/locale_filter_mode=0
 
+[network]
+
+limits/debugger/max_chars_per_second=98304
+
 [rendering]
 
 occlusion_culling/use_occlusion_culling=true

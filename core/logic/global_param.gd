@@ -5,6 +5,7 @@ var debug_control = Control.new()
 var debug_label = Label.new()
 var start_label = RichTextLabel.new()
 var window_size
+var leftUPcorner
 var center
 var kk := false
 var k := false
@@ -24,16 +25,19 @@ func _ready():
 func _process(_delta):
 	Engine.max_fps = FPS
 	if get_viewport().get_camera_3d():
-		window_size = Vector2(get_viewport_transform()[0].x, get_viewport_transform()[1].y) + get_viewport_rect().size / 10
 		center = Vector2(get_viewport_transform()[0].x, get_viewport_transform()[1].y)
+		window_size = center + get_viewport_rect().size / 2
+		leftUPcorner = center + get_viewport_rect().size / 100
+		
 	if get_viewport().get_camera_2d():
-		window_size = get_viewport().get_camera_2d().position - (get_viewport().get_camera_2d().get_viewport_rect().size / 2)
 		center = get_viewport().get_camera_2d().position 
+		window_size = center - (get_viewport().get_camera_2d().get_viewport_rect().size / 2)
+		leftUPcorner = center - (get_viewport().get_camera_2d().get_viewport_rect().size / 2.08)
 	
 	
 	
 	if k == false:
-		start_label.position = window_size
+		start_label.position = leftUPcorner
 		start_label.size = Vector2i(1000, 1000)
 		start_label.bbcode_enabled = true
 		start_label.set_text(str("""Для открытия и закрытия debugmenu нажимай кнопку Shift.
@@ -45,11 +49,12 @@ func _process(_delta):
 		||| Генерация шума занимает определённое время, а по достижению 89% проект завсинет - это нормально.
 		||| По окончанию генерации на весь экран будет показана картинка. 
 		||| Картинку можно будет двигать стрелочками на клавиатуре.
+		||| Масштаб картинки можно будет менять на колёсико мыши.
 		
-		Что бы убрать эту подсказку - открой denugmenu.
+		Что бы убрать эту подсказку - открой denugmenu или запусти генерацию.
 		[color=green][bgcolor=black]DEBUG: limitOutput: """, ProjectSettings.get_setting("network/limits/debugger/max_chars_per_second"), " V-Sync: ", DisplayServer.window_get_vsync_mode(), " (0=False, 1=True)" ,"[/bgcolor][/color]"))
 
-		if Input.is_action_just_pressed("Shift"):
+		if Input.is_action_just_pressed("Shift") or Input.is_action_just_pressed("Ctrl"):
 			start_label.queue_free()
 			k = true
 	if Input.is_action_just_pressed("Shift"):
