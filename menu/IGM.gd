@@ -14,6 +14,12 @@ var char_on_chase : bool
 var ssstart = ColorRect.new()
 
 func _ready():
+	var playsound = AudioStreamPlayer.new()
+	var soud = AudioStreamMP3.new()
+	var file = FileAccess.open("res://sounds/enter_game.mp3", FileAccess.READ)
+	soud.data = file.get_buffer(file.get_length())
+	playsound.stream = soud
+	add_child(playsound)
 	if find_child("ShadowOnStart") != null:
 		start = find_child("ShadowOnStart")
 		pass
@@ -25,6 +31,9 @@ func _ready():
 		start = ssstart
 	shade.visible = false
 	menu.visible = false
+	playsound.play()
+	await get_tree().create_timer(13.).timeout
+	playsound.free()
 	pass
 
 

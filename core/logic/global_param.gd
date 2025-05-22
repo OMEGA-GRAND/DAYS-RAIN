@@ -20,7 +20,7 @@ func _ready():
 	start_label.set_as_top_level(true)
 	ProjectSettings.set_as_basic("network/limits/debugger/max_chars_per_second", true)
 	print(ProjectSettings.get_setting("network/limits/debugger/max_chars_per_second"))
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 	
 func _process(_delta):
 	Engine.max_fps = FPS
