@@ -43,5 +43,3 @@ func _process(delta):
 
 	position += local_dir * move_speed * delta
 	
-
-

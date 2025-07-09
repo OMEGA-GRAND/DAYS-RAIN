@@ -1,30 +1,19 @@
 [gd_scene load_steps=9 format=3 uid="uid://y7bly1oqhooq"]
 
 [ext_resource type="Texture2D" uid="uid://8o26f1uerr7p" path="res://tiles/grass_two.png" id="1_a444q"]
-[ext_resource type="Script" path="res://core/logic/global_param.gd" id="1_pkl2h"]
-[ext_resource type="Script" path="res://core/logic/character.gd" id="2_llrjh"]
+[ext_resource type="Script" uid="uid://d2sd8r81kufcp" path="res://core/global_param.gd" id="1_pkl2h"]
+[ext_resource type="Script" uid="uid://dvv5nibisnuhi" path="res://core/logic/debugcam.gd" id="2_llrjh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0ls7r"]
 texture = ExtResource("1_a444q")
 texture_region_size = Vector2i(214, 144)
 0:1/0 = 0
-0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:1/0/physics_layer_0/angular_velocity = 0.0
 2:1/0 = 0
-2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:1/0/physics_layer_0/angular_velocity = 0.0
 1:1/0 = 0
-1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:1/0/physics_layer_0/angular_velocity = 0.0
 0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
 2:0/0 = 0
-2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:0/0/physics_layer_0/angular_velocity = 0.0
 1:0/0 = 0
 1:0/0/physics_layer_0/linear_velocity = Vector2(1, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-96, -32, 0, -64, 96, -32, 96, 32, 0, 64, -96, 32)
 
 [sub_resource type="TileSet" id="TileSet_p2hyt"]
