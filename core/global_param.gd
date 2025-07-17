@@ -1,17 +1,43 @@
 extends Node2D
+
 var FPS = ((func(): if DisplayServer.screen_get_refresh_rate() == -1: return 60 else: return DisplayServer.screen_get_refresh_rate()).call())
 var mFPS = FPS / 4
+# Настройки FPS исходя из герцовки монитора или по стандарту.
+
 var debug_control = Control.new()
 var debug_label = Label.new()
 var start_label = RichTextLabel.new()
+
+var center
 var window_size
 var leftUPcorner
-var center
+# Первая - предполагаемые значения вьюпорта в 2д и 3д среде. Т.е. это размеры зоны отображения действующей камеры в проекте. Работает в процессе.
+# Вторая - фактический центр отображаемой области камеры. Работает в процессе.
+# Третья - верхний левый угол отображаемой области камеры с небольшим смещением к центру области. Работает в процессе.
+
 var kk := false
 var k := false
+# Для дебаг-меню, переключатели.
+
 var a = false
+### Включает и выключает режим "чистой" загрузки. Если тут стоит true - отключает настрйоки, дебаг-режим. 
+### Это может сломать некоторую логику, если скрипты в активном дереве сцены обращаются к этому синглтону.
 
+@onready var nodes = {
+	"charFile" : preload("res://char.tscn").instantiate() ,
+	"needersFole" : preload("res://needers.tscn").instantiate()
+	}
+# Этот словарь должен использоваться для редактирования текущего дерева сцены. Опционально можно использовать для редактирования сцен. (имею ввиду удаление, добавление и перемещение нод, их редактирование в процессе работы проекта из этого скрипта)
 
+var stage : String = "InGame"
+### Должно будет использоваться для быстрого переключения между разными состояниями проекта. Возможные значения ниже.
+# "InGame" - состояние игры, т.е. запуск игрового мира, генерация ландшавта и так далее.
+# Будет дополняться....
+#
+#
+#
+#
+#
 
 func _ready():
 	add_child(debug_control)
@@ -21,8 +47,13 @@ func _ready():
 	start_label.set_as_top_level(true)
 	ProjectSettings.set_as_basic("network/limits/debugger/max_chars_per_second", true)
 	print(ProjectSettings.get_setting("network/limits/debugger/max_chars_per_second"))
-	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+	### Далее подключается исключительно временная, дебаг-логика, для проверки чего-либо. 
+	### МЕНЯТЬ ЧТО-ЛИБО ВЫШЕ ЭТИХ СТРОК НЕЛЬЗЯ, СЛОМАЕТЕ ПРОЕКТ!!!
 	
+	
+	
+	
+
 func _process(_delta):
 	if a == false:
 		Engine.max_fps = FPS

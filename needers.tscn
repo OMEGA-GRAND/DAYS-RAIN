@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://mypcn3yrhy0y"]
+
+[ext_resource type="Script" uid="uid://b6sablgfm7k8k" path="res://core/needers/needers_CORE.gd" id="1_ak6ty"]
+
+[sub_resource type="GDScript" id="GDScript_ncs3d"]
+script/source = "extends Node
+"
+
+[node name="Controller" type="Node"]
+script = SubResource("GDScript_ncs3d")
+
+[node name="LogicNeeders" type="Node" parent="."]
+script = ExtResource("1_ak6ty")
+
+[node name="LogicRotting" type="Node" parent="."]
+
+[node name="Logic" type="Node" parent="."]

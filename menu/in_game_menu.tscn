@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://bhuwtv3rysx8d"]
 
-[ext_resource type="Script" uid="uid://sgrrjc7idout" path="res://menu/IGM.gd" id="1_1m0wi"]
-[ext_resource type="Shader" uid="uid://nke4lrv0b6jy" path="res://menu/circleshadow.gdshader" id="2_nossb"]
-[ext_resource type="Script" uid="uid://bk2ptiby6yifv" path="res://menu/shadowShader.gd" id="3_p11o5"]
+[ext_resource type="Script" uid="uid://sgrrjc7idout" path="res://menu/shaders/IGM.gd" id="1_1m0wi"]
+[ext_resource type="Shader" uid="uid://nke4lrv0b6jy" path="res://menu/shaders/circleshadow.gdshader" id="2_nossb"]
+[ext_resource type="Script" uid="uid://bk2ptiby6yifv" path="res://menu/shaders/shadowShader.gd" id="3_p11o5"]
 [ext_resource type="Texture2D" uid="uid://b23le1isag0bh" path="res://menu/menu.png" id="4_t6ln0"]
-[ext_resource type="Shader" uid="uid://ib4f3kunlqtx" path="res://menu/start.gdshader" id="5_4qf1y"]
+[ext_resource type="Shader" uid="uid://ib4f3kunlqtx" path="res://menu/shaders/start.gdshader" id="5_4qf1y"]
 [ext_resource type="Texture2D" uid="uid://3dd4hkuowy5l" path="res://menu/icon_holder.png" id="6_6e1wd"]
-[ext_resource type="Script" uid="uid://cvgmlybgvit8t" path="res://menu/ShadowOnStart.gd" id="6_omh7p"]
+[ext_resource type="Script" uid="uid://cvgmlybgvit8t" path="res://menu/shaders/ShadowOnStart.gd" id="6_omh7p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f3bsw"]
 shader = ExtResource("2_nossb")

@@ -17,9 +17,42 @@ func _ready():
 	var pos = 0
 	var steps = 1
 	var step_count = 0
+		
+	code = GDScript.new()
+	code.source_code = """
+extends CSGBox3D
+	
+var target
+var ch 
+var que
+var posi
+var zone = CollisionShape3D.new() 
+var shap = BoxShape3D.new()
+var area = Area3D.new()
+	
+	
+func _ready():
+	zone.set_shape(shap)
+	zone.shape.size = Vector3(4.95,4.95,4.95)
+	add_child(area)
+	area.add_child(zone)
+	que = name.split(", ", true, 3)
+	posi = Vector3(int(que[0]), 0, int(que[2]))
+	ch = get_parent().chanks **2
+	set_process(true)
+	
+func _process(_delta):
+	target = get_parent().find_child("character").position
+	position = round(target / 5) * 5 + posi
+	position.y = 0
+	if position.distance_to(get_parent().find_child("character").position) > 20:
+		set_visible(false)
+	else:
+		set_visible(true)""" 
+	code.reload()
+		
 	for i in chanks**2:
 		cube.append(CSGBox3D.new())
-	for i in chanks**2:
 		step_count += 1
 		cube[i].name = str(x1, ", ", 0, ", ", y1, ", ", i)
 		match pos:
@@ -37,43 +70,13 @@ func _ready():
 			pos = (pos + 1) % 4
 			if pos % 2 == 0:
 				steps += 1
-	code = GDScript.new()
-	
-	code.source_code = """
-extends CSGBox3D
-
-var target
-var ch 
-var que
-var posi
-var zone = CollisionShape3D.new() 
-var shap = BoxShape3D.new()
-var area = Area3D.new()
-
-
-func _ready():
-	zone.set_shape(shap)
-	zone.shape.size = Vector3(4.95,4.95,4.95)
-	add_child(area)
-	area.add_child(zone)
-	que = name.split(", ", true, 3)
-	posi = Vector3(int(que[0]), 0, int(que[2]))
-	ch = get_parent().chanks **2
-func _process(_delta):
-	target = get_parent().find_child("character").position
-	position = round(target / 5) * 5 + posi
-	position.y = 0
-	if position.distance_to(get_parent().find_child("character").position) > 20:
-		set_visible(false)
-	else:
-		set_visible(true)"""
-	for i in chanks**2:
-		code.reload()
-		cube[i].set_script(code)
+				
 		var a = StandardMaterial3D.new()
 		a.albedo_color = Color(0, 0.373, 0.824)
 		cube[i].set_material(a)
+		cube[i].set_script(code)
 		add_child(cube[i])
+		
 	pass
 func _process(_delta):
 	pass

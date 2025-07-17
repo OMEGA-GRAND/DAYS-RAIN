@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1tlh4dlsnv4e"]
+
+[ext_resource type="Texture2D" uid="uid://bk8d3duxpc0xi" path="res://menu/appearance/ornament.png" id="1_1e6ah"]
+
+[node name="Ornament_anchor" type="Marker2D"]
+
+[node name="Ornament" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_1e6ah")

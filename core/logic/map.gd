@@ -350,15 +350,15 @@ func _assemble_image():
 	FILEflow_deb_text += str("""Код генерации отработал без ошибок. Образование дебаг-лога... |
 """)
 	var ii = FILEflow_deb_text.split("|")
-	if FileAccess.file_exists("res://menu/gen_log.txt"):
-		file_log_gen = FileAccess.open("res://menu/gen_log.txt", FileAccess.WRITE)
+	if FileAccess.file_exists("res://core/gen_log.txt"):
+		file_log_gen = FileAccess.open("res://core/gen_log.txt", FileAccess.WRITE)
 		for K in ii.size():
 			file_log_gen.store_string(ii[K - 1])
 		file_log_gen.close()
 		pass
 	else:
 		printerr("Файл-лога не существует, он будет создан...")
-		file_log_gen = FileAccess.open("res://menu/gen_log.txt", FileAccess.WRITE)
+		file_log_gen = FileAccess.open("res://core/gen_log.txt", FileAccess.WRITE)
 		for K in ii.size():
 			file_log_gen.store_string(ii[K - 1])
 		file_log_gen.close()

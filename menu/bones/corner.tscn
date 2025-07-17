@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr2kx24luuomo"]
+
+[ext_resource type="Texture2D" uid="uid://cflcy1avm40ru" path="res://menu/appearance/corner.png" id="1_ccvbi"]
+
+[node name="Corner" type="Sprite2D"]
+rotation = -1.57079
+texture = ExtResource("1_ccvbi")
+
+[node name="anchor" type="Marker2D" parent="."]
+position = Vector2(0, 121)
+
+[node name="anchor2" type="Marker2D" parent="."]
+position = Vector2(-121, 0)

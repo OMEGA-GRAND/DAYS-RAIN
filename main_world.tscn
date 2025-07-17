@@ -11,7 +11,7 @@ script = ExtResource("1_67rwd")
 
 [node name="Node2D" parent="." instance=ExtResource("2_y4qpj")]
 
-[node name="character" parent="." instance=ExtResource("1_qkqsl")]
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.668962, 0.743297, 0, -0.743297, 0.668962, -3.5838, 14.2574, 25.6265)
+
+[node name="character" parent="." instance=ExtResource("1_qkqsl")]

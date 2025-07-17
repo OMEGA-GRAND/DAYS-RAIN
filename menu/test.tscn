@@ -14,12 +14,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fwftn")
 
-[node name="spr" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 564.0
-offset_bottom = 327.0
-pivot_offset = Vector2(282, 163)
-
 [node name="progress" type="ProgressBar" parent="."]
 layout_mode = 0
 offset_left = 40.0
@@ -40,3 +34,8 @@ scroll_following = true
 position = Vector2(576, 324)
 
 [node name="InGameMenu" parent="." instance=ExtResource("2_5af5r")]
+
+[node name="spr" type="TextureRect" parent="."]
+offset_right = 564.0
+offset_bottom = 327.0
+pivot_offset = Vector2(282, 163)
