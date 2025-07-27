@@ -2,6 +2,7 @@ extends Control
 
 @onready var shade = %CircleShadow
 @onready var menu = %Menu
+@onready var parts = [{4 : $Menu/Corner2}]
 @onready var IcH = %IconHolder
 var start
 var key
@@ -24,7 +25,7 @@ func _ready():
 		start = find_child("ShadowOnStart")
 		pass
 	else:
-		var sh = "res://menu/start.gdshader"
+		var sh = "res://menu/shaders/start.gdshader"
 		ssstart.material.set_shader(sh)
 		add_child(ssstart)
 		ssstart.name = "ShadowOnStart"
@@ -56,6 +57,9 @@ func _process(_delta):
 		shade.visible = true
 		menu.visible = true
 		menu.position = GlobalParam.center + Vector2(randf_range(-shake, shake), randf_range(-shake, shake))
+		print("Нода: ", $Menu/Corner2.name, "			Данные позиций: ", $Menu/Corner2.pos, " ,", $Menu/Corner2.Gpos, " ,", $Menu/Corner2.anchors)
+		print("Нода: ", $Menu/Line.name, "				Данные позиций: ", $Menu/Line.pos, " ,", $Menu/Line.Gpos, " ,", $Menu/Line.anchors)
+		print("Нода: ", $Menu/Line/Ornament_anchor.name, "	Данные позиций: ", $Menu/Line/Ornament_anchor.pos, " ,", $Menu/Line/Ornament_anchor.Gpos)
 		t += _delta
 		if t >= 1.:
 			t = 0.

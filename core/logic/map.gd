@@ -23,13 +23,13 @@ var FILEflow_deb_text : String
 
 func set_get(val : Array):
 	if val.size() == 2:
-		print_rich("Получение значения свойства....")
+		print_rich("Получение значения свойства.... ", val)
 		if val[0] is String:
 			node = get_parent().find_child(val[0])
 			if node == null:
-				printerr("Целевая нода не найдена!")
+				printerr("Целевая нода не найдена! ", val)
 		else:
-			printerr("Не верный тип названия ноды.")
+			printerr("Не верный тип названия ноды. ", val)
 		if val[1] is String and node != null:
 			var memb = node.get_property_list()
 			for k in memb.size():
@@ -40,20 +40,20 @@ func set_get(val : Array):
 						pass
 					else:
 						if k == memb.size() - 1:
-							printerr("Передано несуществующее свойство в ноде: ", node)
+							printerr("Передано несуществующее свойство в ноде: ", node ," , ", val)
 		else:
 				if node == null:
 					pass
 				else:
-						printerr("Не верный тип названия свойства ноды.")
+						printerr("Не верный тип названия свойства ноды. " , val)
 	if val.size() == 3 or val.size() == 4:
-		print_rich("Установка значения свойства....")
+		print_rich("Установка значения свойства.... ", val)
 		if val[0] is String:
 			node = get_parent().find_child(val[0])
 			if node == null:
-				printerr("Целевая нода не найдена!")
+				printerr("Целевая нода не найдена! ", val)
 		else:
-			printerr("Не верный тип названия ноды.")
+			printerr("Не верный тип названия ноды. ", val)
 		if val[1] is String and node != null:
 			var memb = node.get_property_list()
 			for k in memb.size():
@@ -64,12 +64,12 @@ func set_get(val : Array):
 						pass
 					else:
 						if k == memb.size() - 1:
-							printerr("Передано несуществующее свойство в ноде: ", node)
+							printerr("Передано несуществующее свойство в ноде: ", node ," , ", val)
 		else:
 				if node == null:
 					pass
 				else:
-						printerr("Не верный тип названия свойства ноды.")
+						printerr("Не верный тип названия свойства ноды. " , val)
 		if (val[2] is String or val[2] is int or val[2] is float or val[2] is bool) and node != null:
 			if typeof(node.get(val[1])) == typeof(val[2]):
 				if val[2] is int or val[2] is float:
@@ -90,7 +90,7 @@ func set_get(val : Array):
 				if node == null:
 					pass
 				else:
-					printerr("Не верный тип передаваемого значения свойства.")
+					printerr("Не верный тип передаваемого значения свойства. " , val)
 		pass
 
 func _ready():

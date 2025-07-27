@@ -12,7 +12,7 @@ func _process(delta):
 		k = lerp(k, 0.0, delta)
 		material.set_shader_parameter("value", k)
 		if material.get_shader_parameter("value") <= 0.01:
-			print("опа")
+			print("Затемнение прояснилось, персонаж открыл глаза, мир запущен.")
 			free()
 		if is_instance_valid(self):
 			if material.get_shader_parameter("value") >= 0.011:

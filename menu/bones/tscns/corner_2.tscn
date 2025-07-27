@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://gbqfb5ul7yb1"]
+[gd_scene load_steps=3 format=3 uid="uid://gbqfb5ul7yb1"]
 
 [ext_resource type="Texture2D" uid="uid://brlgnlkdbktxn" path="res://menu/appearance/corner2.png" id="1_8snbm"]
+[ext_resource type="Script" uid="uid://bhtsyp1mik5hk" path="res://menu/bones/scripts/corner_2.gd" id="2_vm30o"]
 
 [node name="Corner2" type="Sprite2D"]
 texture = ExtResource("1_8snbm")
+script = ExtResource("2_vm30o")
 
 [node name="anchor" type="Marker2D" parent="."]
 position = Vector2(484, -363)

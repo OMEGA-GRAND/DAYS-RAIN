@@ -1,10 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3ev78gogsajf"]
+[gd_scene load_steps=3 format=3 uid="uid://b3ev78gogsajf"]
 
 [ext_resource type="Texture2D" uid="uid://d3b5sd2kp8pvk" path="res://menu/appearance/line.png" id="1_5c21p"]
+[ext_resource type="Script" uid="uid://qtsul8auo0s8" path="res://menu/bones/scripts/line.gd" id="2_yn0p4"]
 
 [node name="Line" type="Sprite2D"]
-rotation = -6.28319
 texture = ExtResource("1_5c21p")
+script = ExtResource("2_yn0p4")
 
 [node name="anchor" type="Marker2D" parent="."]
 position = Vector2(121, -0.000244558)
