@@ -17,84 +17,87 @@ var nod = CSGSphere3D.new()
 var progress = (((float(sizi.x) / float(square_size.x) * (float(sizi.y) / float(square_size.y))) * 7) + 8) / 100000
 var flow_deb_text : String
 var FILEflow_deb_text : String
-@onready var efw : Array = [{"name" : ""}, {"name_property" : ""}, {"typed_value" : null}, {"type_of_math_operatin" : ""}]:
-	set = set_get
+#@onready var efw : Array = [{"name" : ""}, {"name_property" : ""}, {"typed_value" : null}, {"type_of_math_operatin" : ""}]:
+	#set = set_get
+### Будет удалено отсюда.
+
 @onready var deb = $progress/debug
 
-func set_get(val : Array):
-	if val.size() == 2:
-		print_rich("Получение значения свойства.... ", val)
-		if val[0] is String:
-			node = get_parent().find_child(val[0])
-			if node == null:
-				printerr("Целевая нода не найдена! ", val)
-		else:
-			printerr("Не верный тип названия ноды. ", val)
-		if val[1] is String and node != null:
-			var memb = node.get_property_list()
-			for k in memb.size():
-				if val[1] in memb[k]["name"]:
-					break
-				else:
-					if node == null:
-						pass
-					else:
-						if k == memb.size() - 1:
-							printerr("Передано несуществующее свойство в ноде: ", node ," , ", val)
-		else:
-				if node == null:
-					pass
-				else:
-						printerr("Не верный тип названия свойства ноды. " , val)
-	if val.size() == 3 or val.size() == 4:
-		print_rich("Установка значения свойства.... ", val)
-		if val[0] is String:
-			node = get_parent().find_child(val[0])
-			if node == null:
-				printerr("Целевая нода не найдена! ", val)
-		else:
-			printerr("Не верный тип названия ноды. ", val)
-		if val[1] is String and node != null:
-			var memb = node.get_property_list()
-			for k in memb.size():
-				if val[1] in memb[k]["name"]:
-					break
-				else:
-					if node == null:
-						pass
-					else:
-						if k == memb.size() - 1:
-							printerr("Передано несуществующее свойство в ноде: ", node ," , ", val)
-		else:
-				if node == null:
-					pass
-				else:
-						printerr("Не верный тип названия свойства ноды. " , val)
-		if (val[2] is String or val[2] is int or val[2] is float or val[2] is bool) and node != null:
-			if typeof(node.get(val[1])) == typeof(val[2]):
-				if val[2] is int or val[2] is float:
-					if val.size() == 4 and val[3] is String:
-						if val[3] == "+": 
-							node.set(val[1], node.get(val[1]) + val[2])
-						if val[3] == "-": 
-							node.set(val[1], node.get(val[1]) - val[2])
-						if val[3] == "*": 
-							node.set(val[1], node.get(val[1]) * val[2])
-						if val[3] == "/":
-							node.set(val[1], node.get(val[1]) / val[2])
-					elif val.size() == 3: 
-						node.set(val[1], val[2])
-				else:
-					node.set(val[1], val[2])
-		else:
-				if node == null:
-					pass
-				else:
-					printerr("Не верный тип передаваемого значения свойства. " , val)
-		pass
+#func set_get(val : Array):
+	#if val.size() == 2:
+		#print_rich("Получение значения свойства.... ", val)
+		#if val[0] is String:
+			#node = get_parent().find_child(val[0])
+			#if node == null:
+				#printerr("Целевая нода не найдена! ", val)
+		#else:
+			#printerr("Не верный тип названия ноды. ", val)
+		#if val[1] is String and node != null:
+			#var memb = node.get_property_list()
+			#for k in memb.size():
+				#if val[1] in memb[k]["name"]:
+					#break
+				#else:
+					#if node == null:
+						#pass
+					#else:
+						#if k == memb.size() - 1:
+							#printerr("Передано несуществующее свойство в ноде: ", node ," , ", val)
+		#else:
+				#if node == null:
+					#pass
+				#else:
+						#printerr("Не верный тип названия свойства ноды. " , val)
+	#if val.size() == 3 or val.size() == 4:
+		#print_rich("Установка значения свойства.... ", val)
+		#if val[0] is String:
+			#node = get_parent().find_child(val[0])
+			#if node == null:
+				#printerr("Целевая нода не найдена! ", val)
+		#else:
+			#printerr("Не верный тип названия ноды. ", val)
+		#if val[1] is String and node != null:
+			#var memb = node.get_property_list()
+			#for k in memb.size():
+				#if val[1] in memb[k]["name"]:
+					#break
+				#else:
+					#if node == null:
+						#pass
+					#else:
+						#if k == memb.size() - 1:
+							#printerr("Передано несуществующее свойство в ноде: ", node ," , ", val)
+		#else:
+				#if node == null:
+					#pass
+				#else:
+						#printerr("Не верный тип названия свойства ноды. " , val)
+		#if (val[2] is String or val[2] is int or val[2] is float or val[2] is bool) and node != null:
+			#if typeof(node.get(val[1])) == typeof(val[2]):
+				#if val[2] is int or val[2] is float:
+					#if val.size() == 4 and val[3] is String:
+						#if val[3] == "+": 
+							#node.set(val[1], node.get(val[1]) + val[2])
+						#if val[3] == "-": 
+							#node.set(val[1], node.get(val[1]) - val[2])
+						#if val[3] == "*": 
+							#node.set(val[1], node.get(val[1]) * val[2])
+						#if val[3] == "/":
+							#node.set(val[1], node.get(val[1]) / val[2])
+					#elif val.size() == 3: 
+						#node.set(val[1], val[2])
+				#else:
+					#node.set(val[1], val[2])
+		#else:
+				#if node == null:
+					#pass
+				#else:
+					#printerr("Не верный тип передаваемого значения свойства. " , val)
+		#pass
+### Будет удалено отсюда.
 
 func _ready():
-	efw = ["progress", "visible", false]
+	$progress.visible = false
 	pass
 	
 	
@@ -146,7 +149,7 @@ func _process(_delta):
 	$progress.position = GlobalParam.leftUPcorner
 	$spr.position += Input.get_vector("ui_right", "ui_left", "ui_down", "ui_up") * ($spr.size * (_delta / 6) )
 	if Input.is_action_just_pressed("Ctrl"):
-		efw = ["progress", "visible", true]
+		$progress.visible = true
 		if i == false:
 			i = true
 			if sizi.x >= 6000 or sizi.y >= 6000:
@@ -345,7 +348,7 @@ func _assemble_image():
 	i = false
 	squares.clear()
 	q += progress
-	efw = ["progress", "visible", false]
+	$progress.visible = false
 	q = 0
 	FILEflow_deb_text += str("""Код генерации отработал без ошибок. Образование дебаг-лога... |
 """)

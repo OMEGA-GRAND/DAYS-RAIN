@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bgjt01tgm1ly2"]
 
 [ext_resource type="Script" uid="uid://w6khyvbrseg7" path="res://core/logic/map.gd" id="1_fwftn"]
-[ext_resource type="PackedScene" uid="uid://bhuwtv3rysx8d" path="res://menu/in_game_menu.tscn" id="2_5af5r"]
+[ext_resource type="PackedScene" uid="uid://bhuwtv3rysx8d" path="res://menu/shaders/in_game_menu.tscn" id="2_5af5r"]
 
 [node name="Node2D" type="Control"]
 layout_mode = 3
@@ -15,6 +15,7 @@ grow_vertical = 2
 script = ExtResource("1_fwftn")
 
 [node name="progress" type="ProgressBar" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 40.0
 offset_top = 40.0

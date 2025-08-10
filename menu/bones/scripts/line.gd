@@ -1,17 +1,19 @@
 extends Sprite2D
 
-@export var pos = position
-@export var Gpos = global_position
+
+@onready var one = $anchor
+@onready var two = $anchor2
+@export var pos : Vector2
+@export var Gpos  : Vector2
 @export var anchors = []
+
+func _ready() -> void:
+	pos = position
+	Gpos = global_position
+	anchors = [one,two]
 
 func _process(_delta: float) -> void:
 	pos = position
 	Gpos = global_position
-	anchors = [
-	(
-		(func():
-			var one = $anchor
-			var two = $anchor2
-			if one != null and two != null:
-				return [{"1LG" : [one.position, one.global_position]}, {"2LG" : [two.position, two.global_position]}]
-).call())]
+	anchors = [one,two]
+	

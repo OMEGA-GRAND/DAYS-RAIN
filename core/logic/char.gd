@@ -3,27 +3,35 @@ extends Camera3D
 var time = 0
 var mouse_pos = Vector2(0,0)
 var move_speed: float = 10.0
-var mouse_sensitivity: float = 0.3
 var kk = false
+var shaker
 
 func _ready():
 	# Захват мыши
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	get_parent().find_child("InGameMenu").connect("shshake", signals)
+
+func signals(data):
+	if data is Array:
+		if data[0] == "shake":
+			shaker = data[1]
 
 func _input(event):
 	# Управление поворотом камеры с помощью мыши
 	if event is InputEventMouseMotion:
-		rotation.x = clampf(lerpf(rotation.x, rotation.x - event.relative.y * mouse_sensitivity, lerpf(time, 16 * time, time)), -PI/2, PI/2) 
-		rotation.y = lerpf(rotation.y, rotation.y - event.relative.x * mouse_sensitivity, lerpf(time, 16 * time, time))
+		rotation.x = clampf(lerpf(rotation.x, rotation.x - event.relative.y * GlobalParam.mouse_sensitivity[2], lerpf(time, 16 * time, time)), -PI/2, PI/2) 
+		if rotation.y >= 360. or rotation.y <= -360.0:
+			rotation.y = 0.
+		rotation.y = lerpf(rotation.y, rotation.y - event.relative.x * GlobalParam.mouse_sensitivity[2], lerpf(time, 16 * time, time))
 	pass
 
 func _process(delta):
 	time = delta
 	if kk == true:
-		mouse_sensitivity = 0.09
+		GlobalParam.mouse_sensitivity[2] = lerp(GlobalParam.mouse_sensitivity[1] ,GlobalParam.mouse_sensitivity[0], shaker / 100 )
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
-		mouse_sensitivity = 0.3
+		GlobalParam.mouse_sensitivity[2] = GlobalParam.mouse_sensitivity[0]
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if Input.is_action_just_pressed("2nd_side_mouse") or Input.is_action_just_pressed("Э"):
 		if kk == false:

@@ -5,10 +5,11 @@
 
 [node name="Corner2" type="Sprite2D"]
 texture = ExtResource("1_8snbm")
+offset = Vector2(363, 363)
 script = ExtResource("2_vm30o")
 
 [node name="anchor" type="Marker2D" parent="."]
-position = Vector2(484, -363)
+position = Vector2(847, 0)
 
 [node name="anchor2" type="Marker2D" parent="."]
-position = Vector2(-363, 484)
+position = Vector2(0, 847)
