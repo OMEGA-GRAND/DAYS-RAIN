@@ -1,7 +1,7 @@
 extends Node2D
 
-var FPS = ((func(): if DisplayServer.screen_get_refresh_rate() == -1: return 60 else: return DisplayServer.screen_get_refresh_rate()).call())
-var mFPS = FPS / 4
+var FPS = round(((func(): if DisplayServer.screen_get_refresh_rate() == -1: return 60 else: return DisplayServer.screen_get_refresh_rate()).call())) 
+var mFPS = round(FPS / 4)
 # Настройки FPS исходя из герцовки монитора или по стандарту.
 
 var debug_control = Control.new()
@@ -18,6 +18,8 @@ var leftUPcorner
 
 var mainWinSize
 # Переменная, в которую передаётся размер эжкрана в пикселях.
+var screenmode :
+	set = screens
 
 var resolutions = [Vector2i(1280, 720), Vector2i(1366,768), Vector2i(1600,900), Vector2i(1920,1080), Vector2i(2560,1440), Vector2i(3840,2160), Vector2i(5120,2880)]
 # Массив с доступными 16:9 разрешенимями
@@ -32,19 +34,19 @@ var k := false
 #var node
 ## Глобальная функция set-get. Пока что не рабочая.
 
-var a = false
+var a = true
 ### Включает и выключает режим "чистой" загрузки. Если тут стоит true - отключает настрйоки, дебаг-режим. 
 ### Это может сломать некоторую логику, если скрипты в активном дереве сцены обращаются к этому синглтону.
 
-@onready var nodes = {
-	"charFile" : preload("res://char.tscn").instantiate() ,
-	"needersFole" : preload("res://needers.tscn").instantiate()
-	}
-# Этот словарь должен использоваться взаимодействия с другими сценами. 
+var nodes = []
+# Этот словарь должен использоваться для взаимодействия с другими сценами. 
 # Опционально можно использовать для редактирования сцен. 
 # (имею ввиду удаление, добавление и перемещение нод, их редактирование в процессе работы проекта из этого скрипта)
 
-var mouse_sensitivity = [0.3, 0.02, 0.3]
+var settings = [0.3]
+
+
+var mouse_sensitivity = [settings[0], settings[0]/100, 0.0]
 
 var stage : String = "InGame"
 ### Должно использоваться для быстрого переключения между разными состояниями проекта. Возможные значения ниже.
@@ -56,9 +58,27 @@ var stage : String = "InGame"
 #
 #
 
+func screens(mode):
+	if mode == 0:
+		screenmode = "оконный"
+	if mode == 1:
+		screenmode = "минимизированный???? Ты как бля его установил????"
+	if mode == 2:
+		screenmode = "развёрнутый"
+	if mode == 3:
+		screenmode = "фуллскрин без рамки"
+	if mode == 4:
+		screenmode = "полноценный фуллскрин"
+
+
 func _ready():
+	#DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_ALWAYS_ON_TOP, true)
+	mouse_sensitivity[2] = settings[0]
 	DisplayServer.window_set_min_size(resolutions[0])
 	DisplayServer.window_set_max_size(DisplayServer.screen_get_size())
+	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 	add_child(debug_control)
 	debug_control.add_child(debug_label)
 	debug_control.set_as_top_level(true)
@@ -70,19 +90,25 @@ func _ready():
 	### МЕНЯТЬ ЧТО-ЛИБО ВЫШЕ ЭТИХ СТРОК НЕЛЬЗЯ, СЛОМАЕТЕ ПРОЕКТ!!!
 
 func _process(_delta):
+	screenmode = DisplayServer.window_get_mode()
+	Engine.max_fps = FPS
 	mainWinSize = DisplayServer.window_get_size()
-	if a == false:
-		Engine.max_fps = FPS
-		if get_viewport().get_camera_3d():
-			center = Vector2(get_viewport_transform()[0].x, get_viewport_transform()[1].y)
-			window_size = center + get_viewport_rect().size / 2
-			leftUPcorner = center + get_viewport_rect().size / 100
+	if Input.is_action_just_pressed("Q") or Input.is_action_just_pressed("1st_side_mouse"):
+		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	if get_viewport().get_camera_3d():
+		center = Vector2(get_viewport_transform()[0].x, get_viewport_transform()[1].y)
+		window_size = center + get_viewport_rect().size / 2
+		leftUPcorner = center + get_viewport_rect().size / 100
 			
-		if get_viewport().get_camera_2d():
-			center = get_viewport().get_camera_2d().position 
-			window_size = center - (get_viewport().get_camera_2d().get_viewport_rect().size / 2)
-			leftUPcorner = center - (get_viewport().get_camera_2d().get_viewport_rect().size / 2.08)
-		
+	if get_viewport().get_camera_2d():
+		center = get_viewport().get_camera_2d().position 
+		window_size = center - (get_viewport().get_camera_2d().get_viewport_rect().size / 2)
+		leftUPcorner = center - (get_viewport().get_camera_2d().get_viewport_rect().size / 2.08)
+
+	if a == false:
 		if k == false:
 			start_label.position = leftUPcorner
 			start_label.size = Vector2i(1000, 1000)
@@ -120,46 +146,71 @@ func _process(_delta):
 			debug_control.visible = false
 		if kk == true:
 			debug_label.text = str("currentmaxFPS[", Engine.max_fps ,"]   maxFPS[", FPS, "]   minFPS[", mFPS, "]   FPS[", Engine.get_frames_per_second(),"""]
-Важная инфа: """, "сенса: ", mouse_sensitivity)
+Важная инфа: """, "сенса: ", mouse_sensitivity, """ 
+Режим окна игры: """, screenmode)
 			debug_control.position = window_size
 			debug_control.visible = true
 		if Input.is_action_just_pressed("upperNUM1"):
-			DisplayServer.window_set_size(resolutions[0])
-			DisplayServer.window_set_position((DisplayServer.screen_get_size() / 2) - (DisplayServer.window_get_size() / 2))
+			if DisplayServer.screen_get_size() > resolutions[0]:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+				DisplayServer.window_set_position((DisplayServer.screen_get_size() / 2) - (resolutions[0] / 2))
+				DisplayServer.window_set_size(resolutions[0])
+			elif DisplayServer.screen_get_size() == resolutions[0]:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+			else:
+				printerr("Вы пытаетесь установить разрешение выше чем допустимо вашим монитором! Максимальное значение в пикселях: ", DisplayServer.screen_get_size())
 		if Input.is_action_just_pressed("upperNUM2"):
-			if DisplayServer.screen_get_size() >= resolutions[1]:
+			if DisplayServer.screen_get_size() > resolutions[1]:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+				DisplayServer.window_set_position((DisplayServer.screen_get_size() / 2) - (resolutions[1] / 2))
 				DisplayServer.window_set_size(resolutions[1])
-				DisplayServer.window_set_position((DisplayServer.screen_get_size() / 2) - (DisplayServer.window_get_size() / 2))
+			elif DisplayServer.screen_get_size() == resolutions[1]:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 			else:
 				printerr("Вы пытаетесь установить разрешение выше чем допустимо вашим монитором! Максимальное значение в пикселях: ", DisplayServer.screen_get_size())
 		if Input.is_action_just_pressed("upperNUM3"):
-			if DisplayServer.screen_get_size() >= resolutions[2]:
+			if DisplayServer.screen_get_size() > resolutions[2]:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+				DisplayServer.window_set_position((DisplayServer.screen_get_size() / 2) - (resolutions[2] / 2))
 				DisplayServer.window_set_size(resolutions[2])
-				DisplayServer.window_set_position((DisplayServer.screen_get_size() / 2) - (DisplayServer.window_get_size() / 2))
+			elif DisplayServer.screen_get_size() == resolutions[2]:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 			else:
 				printerr("Вы пытаетесь установить разрешение выше чем допустимо вашим монитором! Максимальное значение в пикселях: ", DisplayServer.screen_get_size())
 		if Input.is_action_just_pressed("upperNUM4"):
-			if DisplayServer.screen_get_size() >= resolutions[3]:
+			if DisplayServer.screen_get_size() > resolutions[3]:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+				DisplayServer.window_set_position((DisplayServer.screen_get_size() / 2) - (resolutions[3] / 2))
 				DisplayServer.window_set_size(resolutions[3])
-				DisplayServer.window_set_position((DisplayServer.screen_get_size() / 2) - (DisplayServer.window_get_size() / 2))
+			elif DisplayServer.screen_get_size() == resolutions[3]:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 			else:
 				printerr("Вы пытаетесь установить разрешение выше чем допустимо вашим монитором! Максимальное значение в пикселях: ", DisplayServer.screen_get_size())
 		if Input.is_action_just_pressed("upperNUM5"):
-			if DisplayServer.screen_get_size() >= resolutions[4]:
+			if DisplayServer.screen_get_size() > resolutions[4]:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+				DisplayServer.window_set_position((DisplayServer.screen_get_size() / 2) - (resolutions[4] / 2))
 				DisplayServer.window_set_size(resolutions[4])
-				DisplayServer.window_set_position((DisplayServer.screen_get_size() / 2) - (DisplayServer.window_get_size() / 2))
+			elif DisplayServer.screen_get_size() == resolutions[4]:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 			else:
 				printerr("Вы пытаетесь установить разрешение выше чем допустимо вашим монитором! Максимальное значение в пикселях: ", DisplayServer.screen_get_size())
 		if Input.is_action_just_pressed("upperNUM6"):
-			if DisplayServer.screen_get_size() >= resolutions[5]:
+			if DisplayServer.screen_get_size() > resolutions[5]:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+				DisplayServer.window_set_position((DisplayServer.screen_get_size() / 2) - (resolutions[5] / 2))
 				DisplayServer.window_set_size(resolutions[5])
-				DisplayServer.window_set_position((DisplayServer.screen_get_size() / 2) - (DisplayServer.window_get_size() / 2))
+			elif DisplayServer.screen_get_size() == resolutions[5]:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 			else:
 				printerr("Вы пытаетесь установить разрешение выше чем допустимо вашим монитором! Максимальное значение в пикселях: ", DisplayServer.screen_get_size())
 		if Input.is_action_just_pressed("upperNUM7"):
-			if DisplayServer.screen_get_size() >= resolutions[6]:
+			if DisplayServer.screen_get_size() > resolutions[6]:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+				DisplayServer.window_set_position((DisplayServer.screen_get_size() / 2) - (resolutions[6] / 2))
 				DisplayServer.window_set_size(resolutions[6])
-				DisplayServer.window_set_position((DisplayServer.screen_get_size() / 2) - (DisplayServer.window_get_size() / 2))
+			elif DisplayServer.screen_get_size() == resolutions[6]:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 			else:
 				printerr("Вы пытаетесь установить разрешение выше чем допустимо вашим монитором! Максимальное значение в пикселях: ", DisplayServer.screen_get_size())
 

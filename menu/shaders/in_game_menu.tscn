@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bhuwtv3rysx8d"]
+[gd_scene load_steps=17 format=3 uid="uid://bhuwtv3rysx8d"]
 
 [ext_resource type="Script" uid="uid://sgrrjc7idout" path="res://menu/IGM.gd" id="1_fvgyu"]
 [ext_resource type="Texture2D" uid="uid://brlgnlkdbktxn" path="res://menu/appearance/corner2.png" id="2_ysq8w"]
@@ -8,18 +8,23 @@
 [ext_resource type="Shader" uid="uid://nke4lrv0b6jy" path="res://menu/shaders/circleshadow.gdshader" id="5_rh2s5"]
 [ext_resource type="Script" uid="uid://bk2ptiby6yifv" path="res://menu/shaders/shadowShader.gd" id="6_dive8"]
 [ext_resource type="Shader" uid="uid://d1gh5mkkm2bf" path="res://menu/shaders/in_game_menu.gdshader" id="6_gc380"]
+[ext_resource type="Script" uid="uid://bymlyff1hnrmt" path="res://menu/shaders/background.gd" id="7_2fdsi"]
 [ext_resource type="Shader" uid="uid://ib4f3kunlqtx" path="res://menu/shaders/start.gdshader" id="7_tjrsr"]
 [ext_resource type="Script" uid="uid://cvgmlybgvit8t" path="res://menu/shaders/ShadowOnStart.gd" id="8_tbluo"]
 [ext_resource type="Texture2D" uid="uid://3dd4hkuowy5l" path="res://menu/icon_holder.png" id="9_jwss6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2fdsi"]
 shader = ExtResource("6_gc380")
+shader_parameter/u_active = 0.0
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rh2s5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rh2s5"]
+shader = ExtResource("6_gc380")
+shader_parameter/u_active = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f3bsw"]
 shader = ExtResource("5_rh2s5")
 shader_parameter/value = 1.0
+shader_parameter/u_active = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nult5"]
 shader = ExtResource("7_tjrsr")
@@ -36,6 +41,19 @@ script = ExtResource("1_fvgyu")
 unique_name_in_owner = true
 position = Vector2(585, 298)
 
+[node name="background" type="ColorRect" parent="Menu"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_2fdsi")
+script = ExtResource("7_2fdsi")
+
+[node name="ProgressBar" type="TextureProgressBar" parent="Menu/background"]
+material = SubResource("ShaderMaterial_rh2s5")
+layout_mode = 0
+offset_left = 476.0
+offset_top = 14.0
+offset_right = 726.0
+offset_bottom = 43.485
+
 [node name="RichTextLabel" type="RichTextLabel" parent="Menu"]
 offset_right = 561.0
 offset_bottom = 33.0
@@ -45,6 +63,7 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="Corner1" type="Sprite2D" parent="Menu"]
+unique_name_in_owner = true
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("2_ysq8w")
 offset = Vector2(363, 363)
@@ -57,6 +76,7 @@ position = Vector2(847, 0)
 position = Vector2(0, 847)
 
 [node name="Corner2" type="Sprite2D" parent="Menu"]
+unique_name_in_owner = true
 rotation = 1.57079
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("2_ysq8w")
@@ -70,6 +90,7 @@ position = Vector2(847, 0)
 position = Vector2(0, 847)
 
 [node name="Corner3" type="Sprite2D" parent="Menu"]
+unique_name_in_owner = true
 rotation = 3.14159
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("2_ysq8w")
@@ -83,6 +104,7 @@ position = Vector2(847, 0)
 position = Vector2(0, 847)
 
 [node name="Corner4" type="Sprite2D" parent="Menu"]
+unique_name_in_owner = true
 rotation = 4.71238
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("2_ysq8w")
@@ -96,6 +118,7 @@ position = Vector2(847, 0)
 position = Vector2(0, 847)
 
 [node name="Line1" type="Sprite2D" parent="Menu"]
+unique_name_in_owner = true
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("4_2fdsi")
 script = ExtResource("5_dive8")
@@ -107,6 +130,7 @@ position = Vector2(121, -0.000244558)
 position = Vector2(-121, 0)
 
 [node name="Line2" type="Sprite2D" parent="Menu"]
+unique_name_in_owner = true
 rotation = 1.57079
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("4_2fdsi")
@@ -119,6 +143,7 @@ position = Vector2(121, -0.000244558)
 position = Vector2(-121, 0)
 
 [node name="Line3" type="Sprite2D" parent="Menu"]
+unique_name_in_owner = true
 rotation = 3.14159
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("4_2fdsi")
@@ -131,6 +156,7 @@ position = Vector2(121, -0.000244558)
 position = Vector2(-121, 0)
 
 [node name="Line4" type="Sprite2D" parent="Menu"]
+unique_name_in_owner = true
 rotation = -1.57079
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("4_2fdsi")
@@ -141,11 +167,6 @@ position = Vector2(121, -0.000244558)
 
 [node name="anchor2" type="Marker2D" parent="Menu/Line4"]
 position = Vector2(-121, 0)
-
-[node name="background" type="Sprite2D" parent="Menu"]
-visible = false
-material = SubResource("ShaderMaterial_2fdsi")
-texture = SubResource("PlaceholderTexture2D_rh2s5")
 
 [node name="CircleShadow" type="ColorRect" parent="."]
 unique_name_in_owner = true

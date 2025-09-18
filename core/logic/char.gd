@@ -5,9 +5,12 @@ var mouse_pos = Vector2(0,0)
 var move_speed: float = 10.0
 var kk = false
 var shaker
+signal on_off
 
 func _ready():
 	# Захват мыши
+	if !GlobalParam.nodes.has(self):
+		GlobalParam.nodes.append(self)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	get_parent().find_child("InGameMenu").connect("shshake", signals)
 
@@ -26,6 +29,7 @@ func _input(event):
 	pass
 
 func _process(delta):
+	
 	time = delta
 	if kk == true:
 		GlobalParam.mouse_sensitivity[2] = lerp(GlobalParam.mouse_sensitivity[1] ,GlobalParam.mouse_sensitivity[0], shaker / 100 )
@@ -35,8 +39,10 @@ func _process(delta):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if Input.is_action_just_pressed("2nd_side_mouse") or Input.is_action_just_pressed("Э"):
 		if kk == false:
+			on_off.emit(["OnOff", 1.0])
 			kk = true
 		else:
+			on_off.emit(["OnOff", 0.0])
 			kk = false
 
 	

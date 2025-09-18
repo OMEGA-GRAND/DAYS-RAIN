@@ -104,11 +104,7 @@ func _ready():
 
 func _process(_delta):
 	$spr.pivot_offset = $spr.size / 2
-	if Input.is_action_just_pressed("Q") or Input.is_action_just_pressed("1st_side_mouse"):
-		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
-		else:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	
 	if $spr.texture:
 		
 		if Input.is_action_just_pressed("up_mid_mouse"):
@@ -148,7 +144,9 @@ func _process(_delta):
 	$progress.value = q
 	$progress.position = GlobalParam.leftUPcorner
 	$spr.position += Input.get_vector("ui_right", "ui_left", "ui_down", "ui_up") * ($spr.size * (_delta / 6) )
-	if Input.is_action_just_pressed("Ctrl"):
+	if Input.is_action_just_pressed("NONE"):
+		if $spr.texture:
+			$spr.texture = null
 		$progress.visible = true
 		if i == false:
 			i = true

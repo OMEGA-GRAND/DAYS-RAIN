@@ -1,6 +1,6 @@
 extends Node
 
-var mainhelth := [
+var mainhealth := [
 		{"общЗдоровье" : 100.0},
 		[
 			[
@@ -61,6 +61,7 @@ var mainhelth := [
 			]
 		]
 	]
+var standarthealth := []
 var parts := [
 	[
 		{"Голова" : 100.0},
@@ -166,6 +167,7 @@ var parts := [
 		]
 	],
 	]
+
 var preset
 
 func _ready() -> void:

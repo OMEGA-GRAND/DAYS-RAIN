@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://mypcn3yrhy0y"]
+
+[ext_resource type="Script" uid="uid://dfpg4ca1bs4n8" path="res://core/needers/needersControl.gd" id="1_5x3r0"]
+[ext_resource type="Script" uid="uid://b6sablgfm7k8k" path="res://core/needers/needers_CORE.gd" id="2_o7rpd"]
+
+[node name="Controller" type="Node"]
+script = ExtResource("1_5x3r0")
+
+[node name="LogicNeeders" type="Node" parent="."]
+script = ExtResource("2_o7rpd")
+
+[node name="LogicRotting" type="Node" parent="."]
+
+[node name="Logic" type="Node" parent="."]

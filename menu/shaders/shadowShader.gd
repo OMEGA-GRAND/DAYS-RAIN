@@ -4,6 +4,7 @@ var k = 0.0
 var kk = false
 var shaker
 signal side_mouse_2nd
+signal on_off
 
 func _ready() -> void:
 	$"..".connect("shshake", signals)
@@ -18,9 +19,11 @@ func _process(_delta):
 	if Input.is_action_just_pressed("2nd_side_mouse") or Input.is_action_just_pressed("Э"):
 		if kk == false:
 			side_mouse_2nd.emit(true)
+			on_off.emit(["OnOff", 1.0])
 			kk = true
 		else:
 			side_mouse_2nd.emit(false)
+			on_off.emit(["OnOff", 0.0])
 			kk = false
 	if kk == true:
 		material.set_shader_parameter("value", k)

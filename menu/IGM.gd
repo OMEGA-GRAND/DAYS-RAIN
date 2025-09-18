@@ -11,14 +11,14 @@ extends Control
 @onready var one = $Menu/RichTextLabel
 
 @onready var bg = $Menu/background
-@onready var Corner1 = [$Menu/Corner1, $Menu/Corner1.anchors]
-@onready var Corner2 = [$Menu/Corner2, $Menu/Corner2.anchors]
-@onready var Corner3 = [$Menu/Corner3, $Menu/Corner3.anchors]
-@onready var Corner4 = [$Menu/Corner4, $Menu/Corner4.anchors]
-@onready var Line1 = [$Menu/Line1, $Menu/Line1.anchors]
-@onready var Line2 = [$Menu/Line2, $Menu/Line2.anchors]
-@onready var Line3 = [$Menu/Line3, $Menu/Line3.anchors]
-@onready var Line4 = [$Menu/Line4, $Menu/Line4.anchors]
+@onready var Corner1 = [%Corner1, %Corner1.anchors]
+@onready var Corner2 = [%Corner2, %Corner2.anchors]
+@onready var Corner3 = [%Corner3, %Corner3.anchors]
+@onready var Corner4 = [%Corner4, %Corner4.anchors]
+@onready var Line1 = [%Line1, %Line1.anchors]
+@onready var Line2 = [%Line2, %Line2.anchors]
+@onready var Line3 = [%Line3, %Line3.anchors]
+@onready var Line4 = [%Line4, %Line4.anchors]
 @onready var ornament = preload("res://menu/bones/tscns/ornament.tscn").instantiate()
 var countOrnament = []
 # Страшно, да?
@@ -33,11 +33,19 @@ var shake: float
 # Коэфициент тряски. При открытом IGM - постоянно увеличивается, иначе - наоборот. Колесо мыши для ручного изменения.
 signal shshake
 
+
 var t: float
 # Таймер, ограниченный от 0 до 1.
 var k = 1 
 var kk = 0
  
+var winSize
+# Для проверки размера окна игры.
+var tt  = Timer.new()
+# Таймер после изменения размера окна игры.
+var l : int
+# Переключатель для проверки размера окна игры.
+
 
 var char_on_attention : bool
 var char_on_busy : bool
@@ -57,8 +65,14 @@ var start
 var calc
 # Для расчёта позиций каждого из элементов меню. 
 
+func _search():
+	pass
 
 func _ready():
+	GlobalParam.nodes.map(_search)
+	add_child(tt)
+	tt.autostart = false
+	tt.one_shot = true
 	shade.connect("side_mouse_2nd", leverer)
 	menu.modulate.a = 0
 	Corner1[0].scale = Xsize
@@ -69,6 +83,7 @@ func _ready():
 	Line2[0].scale = Xsize
 	Line3[0].scale = Xsize
 	Line4[0].scale = Xsize
+	
 	var playsound = AudioStreamPlayer.new()
 	var soud = AudioStreamMP3.new()
 	var file = FileAccess.open("res://sounds/enter_game.mp3", FileAccess.READ)
@@ -95,7 +110,8 @@ func _ready():
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if event.relative.is_zero_approx() == false:
-			menu.position -= event.relative * lerp(0.3, 4., shake / 100) 
+			menu.position -= event.relative * lerp(GlobalParam.mouse_sensitivity[1] , GlobalParam.mouse_sensitivity[0]*5, shake / 100) 
+			bg.position += event.relative * lerp(GlobalParam.mouse_sensitivity[1], GlobalParam.mouse_sensitivity[0]*5, shake / 100)
 			pass
 
 func leverer(lever):
@@ -105,7 +121,20 @@ func leverer(lever):
 		kk = 0
 	
 func _process(delta):
-	menu.position = clamp(menu.position ,-Vector2(DisplayServer.window_get_size()) * 1.5,Vector2(DisplayServer.window_get_size() * 1.5))
+	if tt.time_left == 0:
+		tt.stop()
+		l = 1
+	else:
+		l = 0
+	if winSize != DisplayServer.window_get_size():
+		if tt.time_left == 0 or tt.is_stopped():
+			tt.start(3.)
+			winSize = DisplayServer.window_get_size()
+		else: 
+			tt.stop()
+			tt.start(3.)
+			winSize = DisplayServer.window_get_size()
+	
 	
 	shshake.emit(["shake", shake])
 	
@@ -132,27 +161,35 @@ func _process(delta):
 правая линия: """, Line2[0].position, """
 нижняя линия: """, Line3[0].position, """
 левая линия: """, Line4[0].position, """
-к.масштаба меню: """, Xsize, """
+к.масштаба меню: """, Xsize, " t: ", snapped(tt.time_left, 0.1), " menu.size откл/вкл: ", l, """
 мин/макс/текущий размеры окна: """, GlobalParam.resolutions[0], "/", DisplayServer.screen_get_size(), "/", DisplayServer.window_get_size())
 	t = clampf(t, 0., 1.)
 	shake = clampf(shake, 0., 100.)
 	
-
-	calc = Vector2(GlobalParam.mainWinSize / 4)
-	Corner1[0].position = lerp(Corner1[0].position, -calc, delta *2)
-	Corner2[0].position = lerp(Corner2[0].position, Vector2(calc.x, -calc.y), delta *2)
-	Corner3[0].position = lerp(Corner3[0].position, calc, delta *2)
-	Corner4[0].position = lerp(Corner4[0].position, Vector2(-calc.x, calc.y), delta *2)
-	Line1[0].position = lerp(Line1[0].position, Vector2(.0 , -calc.y), delta *2)
-	Line2[0].position = lerp(Line2[0].position, Vector2(calc.x , 0), delta *2)
-	Line3[0].position = lerp(Line3[0].position, Vector2(.0 , calc.y), delta *2)
-	Line4[0].position = lerp(Line4[0].position, Vector2(-calc.x , 0), delta *2)
-	Line1[0].scale.x = (abs(Corner1[0].position.x) + abs(Corner2[0].position.x) - 127 * 2) / 242
-	Line2[0].scale.x = (abs(Corner2[0].position.y) + abs(Corner3[0].position.y) - 127 * 2) / 242
-	Line3[0].scale.x = (abs(Corner3[0].position.x) + abs(Corner4[0].position.x) - 127 * 2) / 242
-	Line4[0].scale.x = (abs(Corner4[0].position.y) + abs(Corner1[0].position.y) - 127 * 2) / 242 
-	bg.position = Vector2.ZERO
-	bg.texture.size = Vector2(abs(Corner1[0].position.x) + abs(Corner2[0].position.x), abs(Corner1[0].position.y) + abs(Corner3[0].position.y)) - Vector2(30,30)
+	if l == 0:
+		calc = Vector2(GlobalParam.mainWinSize / 4)
+		Corner1[0].position	 = lerp(Corner1[0].position, -calc, delta *2)
+		Corner2[0].position	 = lerp(Corner2[0].position, Vector2(calc.x, -calc.y), delta *2)
+		Corner3[0].position	 = lerp(Corner3[0].position, calc, delta *2)
+		Corner4[0].position	 = lerp(Corner4[0].position, Vector2(-calc.x, calc.y), delta *2)
+		Line1[0].position	 = lerp(Line1[0].position, Vector2(.0 , -calc.y), delta *2)
+		Line2[0].position	 = lerp(Line2[0].position, Vector2(calc.x , 0), delta *2)
+		Line3[0].position	 = lerp(Line3[0].position, Vector2(.0 , calc.y), delta *2)
+		Line4[0].position	 = lerp(Line4[0].position, Vector2(-calc.x , 0), delta *2)
+		Line1[0].scale.x = (abs(Corner1[0].position.x) + abs(Corner2[0].position.x) - 127 * 2) / 242
+		Line2[0].scale.x = (abs(Corner2[0].position.y) + abs(Corner3[0].position.y) - 127 * 2) / 242
+		Line3[0].scale.x = (abs(Corner3[0].position.x) + abs(Corner4[0].position.x) - 127 * 2) / 242
+		Line4[0].scale.x = (abs(Corner4[0].position.y) + abs(Corner1[0].position.y) - 127 * 2) / 242
+	menu.position = Vector2(
+		clamp(menu.position.x ,-Vector2(DisplayServer.window_get_size()).x * 1.5 , Vector2(DisplayServer.window_get_size()).x * 1.5),
+		clamp(menu.position.y ,-Vector2(DisplayServer.window_get_size()).y * 1.1 , Vector2(DisplayServer.window_get_size()).y * 1.1)
+	)
+	bg.position = Vector2(
+		clamp(bg.position.x, (Vector2.ZERO.x - bg.size.x / 2) - 10., (Vector2.ZERO.x - bg.size.x / 2) + 10.),
+		clamp(bg.position.y, (Vector2.ZERO.y - bg.size.y / 2) - 10., (Vector2.ZERO.y - bg.size.y / 2) + 10.)
+		) 
+	bg.position = lerp(bg.position, Vector2.ZERO - bg.size / 2, delta * 10)
+	bg.size = Vector2(abs(Corner1[0].position.x) + abs(Corner2[0].position.x), abs(Corner1[0].position.y) + abs(Corner3[0].position.y)) - Vector2(40,40)
 
 	if Input.is_action_just_pressed("mid_mouse"):
 		if k == 0:

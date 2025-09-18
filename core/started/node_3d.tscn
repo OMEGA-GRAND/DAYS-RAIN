@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxb7j17dumblc"]
+
+[ext_resource type="Texture2D" uid="uid://dism5vn6viqw6" path="res://core/started/back.png" id="1_gt0nf"]
+[ext_resource type="Texture2D" uid="uid://d38fu8td6c0cf" path="res://core/started/middle.png" id="2_5oko5"]
+[ext_resource type="Texture2D" uid="uid://ccxuqtskw3kno" path="res://core/started/inmass.png" id="3_nirgi"]
+[ext_resource type="Texture2D" uid="uid://1rvlqbhdo45i" path="res://core/started/front.png" id="3_yokbb"]
+[ext_resource type="Texture2D" uid="uid://5b3ydphfdvcn" path="res://core/started/logo.png" id="4_yokbb"]
+
+[node name="startmenu" type="Node2D"]
+
+[node name="Camera3D" type="Camera2D" parent="."]
+limit_enabled = false
+
+[node name="bcg" type="Node2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="back" type="Parallax2D" parent="bcg"]
+repeat_size = Vector2(1025.19, 720.405)
+autoscroll = Vector2(1, 1)
+repeat_times = 4
+
+[node name="Back" type="Sprite2D" parent="bcg/back"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_gt0nf")
+
+[node name="inmass" type="Parallax2D" parent="bcg"]
+repeat_size = Vector2(1025.19, 720.405)
+autoscroll = Vector2(2, 2)
+repeat_times = 4
+
+[node name="Inmass" type="Sprite2D" parent="bcg/inmass"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_nirgi")
+
+[node name="Logo" type="Sprite2D" parent="bcg"]
+position = Vector2(-576, -553)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_yokbb")
+
+[node name="middle" type="Parallax2D" parent="bcg"]
+repeat_size = Vector2(1025.19, 720.405)
+autoscroll = Vector2(3, 3)
+repeat_times = 4
+
+[node name="Middle" type="Sprite2D" parent="bcg/middle"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_5oko5")
+
+[node name="front" type="Parallax2D" parent="bcg"]
+modulate = Color(1, 1, 1, 0.5568628)
+repeat_size = Vector2(1025.19, 720.405)
+autoscroll = Vector2(4, 4)
+repeat_times = 4
+
+[node name="Front" type="Sprite2D" parent="bcg/front"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_yokbb")
