@@ -1,10 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxb7j17dumblc"]
+[gd_scene load_steps=15 format=3 uid="uid://dxb7j17dumblc"]
 
 [ext_resource type="Texture2D" uid="uid://dism5vn6viqw6" path="res://core/started/back.png" id="1_gt0nf"]
 [ext_resource type="Texture2D" uid="uid://d38fu8td6c0cf" path="res://core/started/middle.png" id="2_5oko5"]
 [ext_resource type="Texture2D" uid="uid://ccxuqtskw3kno" path="res://core/started/inmass.png" id="3_nirgi"]
 [ext_resource type="Texture2D" uid="uid://1rvlqbhdo45i" path="res://core/started/front.png" id="3_yokbb"]
 [ext_resource type="Texture2D" uid="uid://5b3ydphfdvcn" path="res://core/started/logo.png" id="4_yokbb"]
+[ext_resource type="Texture2D" uid="uid://dh8jx82034ru5" path="res://fonts/letters/thinking/blood/__н.png" id="6_tao1e"]
+[ext_resource type="Texture2D" uid="uid://dvpbmvcl57owb" path="res://fonts/letters/thinking/blood/__о.png" id="7_qumlg"]
+[ext_resource type="Texture2D" uid="uid://dpovx6807cdk2" path="res://fonts/letters/thinking/blood/__в.png" id="8_j5hkr"]
+[ext_resource type="Texture2D" uid="uid://d3ck8twtrhft3" path="res://fonts/letters/thinking/blood/__а.png" id="9_q0cae"]
+[ext_resource type="Texture2D" uid="uid://bmjd7mwb73pyf" path="res://fonts/letters/thinking/blood/__я.png" id="10_p1ir5"]
+[ext_resource type="Texture2D" uid="uid://ciw6p6sdn8e0q" path="res://fonts/letters/thinking/blood/__и.png" id="11_0n4cl"]
+[ext_resource type="Texture2D" uid="uid://cdsrkih5dd1ws" path="res://fonts/letters/thinking/blood/__г.png" id="12_71fsy"]
+[ext_resource type="Texture2D" uid="uid://wxb3lnc3iqdy" path="res://fonts/letters/thinking/blood/__р.png" id="13_ltbuf"]
+[ext_resource type="Texture2D" uid="uid://dtfgsf38m6rsb" path="res://fonts/letters/thinking/backgrount/blood/_bg__н.png" id="14_qumlg"]
 
 [node name="startmenu" type="Node2D"]
 
@@ -34,7 +43,7 @@ texture = ExtResource("3_nirgi")
 
 [node name="Logo" type="Sprite2D" parent="bcg"]
 position = Vector2(-576, -553)
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_yokbb")
 
 [node name="middle" type="Parallax2D" parent="bcg"]
@@ -55,3 +64,53 @@ repeat_times = 4
 [node name="Front" type="Sprite2D" parent="bcg/front"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_yokbb")
+
+[node name="Н" type="Sprite2D" parent="."]
+position = Vector2(-200, 5)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("6_tao1e")
+
+[node name="О" type="Sprite2D" parent="."]
+position = Vector2(-161, 11)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("7_qumlg")
+
+[node name="В" type="Sprite2D" parent="."]
+position = Vector2(-120, 3.000001)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_j5hkr")
+
+[node name="А" type="Sprite2D" parent="."]
+position = Vector2(-78.00001, 2)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("9_q0cae")
+
+[node name="Я" type="Sprite2D" parent="."]
+position = Vector2(-35, -2)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("10_p1ir5")
+
+[node name="И" type="Sprite2D" parent="."]
+position = Vector2(34, 11)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("11_0n4cl")
+
+[node name="Г" type="Sprite2D" parent="."]
+position = Vector2(71, 3)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("12_71fsy")
+
+[node name="Р" type="Sprite2D" parent="."]
+position = Vector2(106.000015, 1)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("13_ltbuf")
+
+[node name="А2" type="Sprite2D" parent="."]
+position = Vector2(137.00002, 12)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("9_q0cae")
+
+[node name="BgН" type="Sprite2D" parent="."]
+position = Vector2(-196, 3)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("14_qumlg")
