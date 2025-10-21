@@ -7,6 +7,14 @@ var map
 
 
 func _ready():
+	if get_node("/root/GlobalParam").get("nodes") != null:
+		GlobalParam.nodes.append(name)
+		GlobalParam.nodes.append(self)
+		GlobalParam.nodes.append($IGM.name)
+		GlobalParam.nodes.append($IGM)
+		GlobalParam.nodes.append($character.name)
+		GlobalParam.nodes.append($character)
+	
 	map = FastNoiseLite.new()
 	map.noise_type = FastNoiseLite.TYPE_CELLULAR
 	map.set_cellular_distance_function(FastNoiseLite.DISTANCE_MANHATTAN)

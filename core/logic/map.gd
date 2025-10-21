@@ -142,6 +142,7 @@ func _process(_delta):
 	
 	q = clamp(q, 0.0, 100.0)
 	$progress.value = q
+	
 	$progress.position = GlobalParam.leftUPcorner
 	$spr.position += Input.get_vector("ui_right", "ui_left", "ui_down", "ui_up") * ($spr.size * (_delta / 6) )
 	if Input.is_action_just_pressed("NONE"):

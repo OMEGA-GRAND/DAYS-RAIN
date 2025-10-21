@@ -1,0 +1,114 @@
+[gd_scene load_steps=21 format=3 uid="uid://cya4yjfu1gs5o"]
+
+[ext_resource type="Script" uid="uid://uoew0dlttukt" path="res://core/started/settingsbutton.gd" id="1_aamle"]
+[ext_resource type="Texture2D" uid="uid://cbiicspui6sgc" path="res://fonts/letters/thinking/UPPERCASE/grey/__Н.png" id="2_ymren"]
+[ext_resource type="Texture2D" uid="uid://bu3sm7hgcjrnn" path="res://fonts/letters/thinking/DOWNCASE/grey/__а.png" id="3_c03hp"]
+[ext_resource type="Texture2D" uid="uid://prnwsu2ydi53" path="res://fonts/letters/thinking/background/UPPERCASE/lightgrey_grey_darkgrey/_bg__Н.png" id="3_e8515"]
+[ext_resource type="Texture2D" uid="uid://brdt6t05iwds4" path="res://fonts/letters/thinking/DOWNCASE/grey/__с.png" id="4_asfb5"]
+[ext_resource type="Texture2D" uid="uid://2sa36cjtmrpt" path="res://fonts/letters/thinking/background/DOWNCASE/lightgrey_grey_darkgrey/_bg__а.png" id="5_ia1up"]
+[ext_resource type="Texture2D" uid="uid://58hvjb6nb30c" path="res://fonts/letters/thinking/DOWNCASE/grey/__т.png" id="5_spbdb"]
+[ext_resource type="Texture2D" uid="uid://dkfx1sfck2eml" path="res://fonts/letters/thinking/DOWNCASE/grey/__р.png" id="6_jjw5b"]
+[ext_resource type="Texture2D" uid="uid://d07nyh8ajo5sy" path="res://fonts/letters/thinking/background/DOWNCASE/lightgrey_grey_darkgrey/_bg__с.png" id="7_dcxbw"]
+[ext_resource type="Texture2D" uid="uid://xuedsv80iow8" path="res://fonts/letters/thinking/DOWNCASE/grey/__о.png" id="7_on0n7"]
+[ext_resource type="Texture2D" uid="uid://in8iouuilk20" path="res://fonts/letters/thinking/DOWNCASE/grey/__й.png" id="8_ylvbe"]
+[ext_resource type="Texture2D" uid="uid://id6n0p8ni4bx" path="res://fonts/letters/thinking/DOWNCASE/grey/__к.png" id="9_87tvl"]
+[ext_resource type="Texture2D" uid="uid://bn4ft8tuty5ah" path="res://fonts/letters/thinking/background/DOWNCASE/lightgrey_grey_darkgrey/_bg__т.png" id="9_kxmvb"]
+[ext_resource type="Texture2D" uid="uid://blbkt23cmdydh" path="res://fonts/letters/thinking/DOWNCASE/grey/__и.png" id="10_fntv6"]
+[ext_resource type="Texture2D" uid="uid://c70iyb2qpl7ea" path="res://fonts/letters/thinking/background/DOWNCASE/lightgrey_grey_darkgrey/_bg__р.png" id="11_uv7sm"]
+[ext_resource type="Texture2D" uid="uid://wgtjyp2we3jq" path="res://fonts/letters/thinking/background/DOWNCASE/lightgrey_grey_darkgrey/_bg__о.png" id="13_bunfl"]
+[ext_resource type="Texture2D" uid="uid://bls8uf7swnraa" path="res://fonts/letters/thinking/background/DOWNCASE/lightgrey_grey_darkgrey/_bg__й.png" id="15_mrm82"]
+[ext_resource type="Texture2D" uid="uid://canmiu8uk1t8f" path="res://fonts/letters/thinking/background/DOWNCASE/lightgrey_grey_darkgrey/_bg__к.png" id="17_45ahi"]
+[ext_resource type="Texture2D" uid="uid://55fuvrsv56s6" path="res://fonts/letters/thinking/background/DOWNCASE/lightgrey_grey_darkgrey/_bg__и.png" id="19_v0j6d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q0cae"]
+size = Vector2(348, 73)
+
+[node name="settings" type="Area2D"]
+script = ExtResource("1_aamle")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_q0cae")
+
+[node name="Н" type="Sprite2D" parent="."]
+position = Vector2(-146, -2)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_ymren")
+
+[node name="BgН" type="Sprite2D" parent="Н"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_e8515")
+
+[node name="А" type="Sprite2D" parent="."]
+position = Vector2(-103, 4.0000005)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_c03hp")
+
+[node name="BgА" type="Sprite2D" parent="А"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_ia1up")
+
+[node name="С" type="Sprite2D" parent="."]
+position = Vector2(-72, 4.000001)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_asfb5")
+
+[node name="BgС" type="Sprite2D" parent="С"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("7_dcxbw")
+
+[node name="Т" type="Sprite2D" parent="."]
+position = Vector2(-38.999996, 3.0000038)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_spbdb")
+
+[node name="BgТ" type="Sprite2D" parent="Т"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("9_kxmvb")
+
+[node name="Р" type="Sprite2D" parent="."]
+position = Vector2(-3, 9.000002)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("6_jjw5b")
+
+[node name="BgР" type="Sprite2D" parent="Р"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("11_uv7sm")
+
+[node name="О" type="Sprite2D" parent="."]
+position = Vector2(34.000008, 2.000002)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("7_on0n7")
+
+[node name="BgО" type="Sprite2D" parent="О"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("13_bunfl")
+
+[node name="Й" type="Sprite2D" parent="."]
+position = Vector2(72.00002, 3.8146973e-06)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_ylvbe")
+
+[node name="BgЙ" type="Sprite2D" parent="Й"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("15_mrm82")
+
+[node name="К" type="Sprite2D" parent="."]
+position = Vector2(112.000015, 3.000002)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("9_87tvl")
+
+[node name="BgК" type="Sprite2D" parent="К"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("17_45ahi")
+
+[node name="И" type="Sprite2D" parent="."]
+position = Vector2(150.00002, 4.000002)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("10_fntv6")
+
+[node name="BgИ" type="Sprite2D" parent="И"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("19_v0j6d")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

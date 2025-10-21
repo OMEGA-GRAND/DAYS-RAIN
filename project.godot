@@ -14,7 +14,7 @@ config/name="Calm on a rainy night (4.5)"
 config/name_localized={
 "ru": "Спокойствие в дождливой ночи"
 }
-run/main_scene="res://main_world.tscn"
+run/main_scene="uid://y2q82es5mgu2"
 config/features=PackedStringArray("4.5", "Forward Plus")
 run/delta_smoothing=false
 

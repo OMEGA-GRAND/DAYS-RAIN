@@ -65,11 +65,8 @@ var start
 var calc
 # Для расчёта позиций каждого из элементов меню. 
 
-func _search():
-	pass
-
 func _ready():
-	GlobalParam.nodes.map(_search)
+	
 	add_child(tt)
 	tt.autostart = false
 	tt.one_shot = true
@@ -163,6 +160,7 @@ func _process(delta):
 левая линия: """, Line4[0].position, """
 к.масштаба меню: """, Xsize, " t: ", snapped(tt.time_left, 0.1), " menu.size откл/вкл: ", l, """
 мин/макс/текущий размеры окна: """, GlobalParam.resolutions[0], "/", DisplayServer.screen_get_size(), "/", DisplayServer.window_get_size())
+	
 	t = clampf(t, 0., 1.)
 	shake = clampf(shake, 0., 100.)
 	

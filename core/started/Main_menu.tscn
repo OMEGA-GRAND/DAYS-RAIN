@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://y2q82es5mgu2"]
+
+[ext_resource type="Script" uid="uid://b8y18pygr0bmh" path="res://core/started/startMenu.gd" id="1_6doeh"]
+[ext_resource type="Texture2D" uid="uid://dism5vn6viqw6" path="res://core/started/back.png" id="2_qoe8l"]
+[ext_resource type="Texture2D" uid="uid://ccxuqtskw3kno" path="res://core/started/inmass.png" id="3_3c2sw"]
+[ext_resource type="Texture2D" uid="uid://5b3ydphfdvcn" path="res://core/started/logo.png" id="4_wqcrj"]
+[ext_resource type="Texture2D" uid="uid://d38fu8td6c0cf" path="res://core/started/middle.png" id="5_octsd"]
+[ext_resource type="Texture2D" uid="uid://1rvlqbhdo45i" path="res://core/started/front.png" id="6_d2l8k"]
+[ext_resource type="PackedScene" uid="uid://cyj27oksdllmi" path="res://core/started/newgame_buttom.tscn" id="7_aocvl"]
+[ext_resource type="PackedScene" uid="uid://cya4yjfu1gs5o" path="res://core/started/settings_buttom.tscn" id="8_8c43f"]
+
+[node name="startmenu" type="Node2D"]
+script = ExtResource("1_6doeh")
+L = null
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_enabled = false
+
+[node name="bcg" type="Node2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="back" type="Parallax2D" parent="bcg"]
+repeat_size = Vector2(1025.19, 720.405)
+autoscroll = Vector2(1, 1)
+repeat_times = 4
+
+[node name="Back" type="Sprite2D" parent="bcg/back"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_qoe8l")
+
+[node name="inmass" type="Parallax2D" parent="bcg"]
+repeat_size = Vector2(1025.19, 720.405)
+autoscroll = Vector2(2, 2)
+repeat_times = 4
+
+[node name="Inmass" type="Sprite2D" parent="bcg/inmass"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_3c2sw")
+
+[node name="Logo" type="Sprite2D" parent="bcg"]
+position = Vector2(-576, -553)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_wqcrj")
+
+[node name="middle" type="Parallax2D" parent="bcg"]
+repeat_size = Vector2(1025.19, 720.405)
+autoscroll = Vector2(3, 3)
+repeat_times = 4
+
+[node name="Middle" type="Sprite2D" parent="bcg/middle"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_octsd")
+
+[node name="front" type="Parallax2D" parent="bcg"]
+modulate = Color(1, 1, 1, 0.5568628)
+repeat_size = Vector2(1025.19, 720.405)
+autoscroll = Vector2(4, 4)
+repeat_times = 4
+
+[node name="Front" type="Sprite2D" parent="bcg/front"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_d2l8k")
+
+[node name="newgame" parent="." instance=ExtResource("7_aocvl")]
+
+[node name="settings" parent="." instance=ExtResource("8_8c43f")]
+position = Vector2(0, 103)
+
+[connection signal="mouse_entered" from="newgame" to="." method="_on_newgame_mouse_entered"]
+[connection signal="mouse_exited" from="newgame" to="." method="_on_newgame_mouse_exited"]

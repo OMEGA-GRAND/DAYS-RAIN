@@ -3,20 +3,10 @@
 [ext_resource type="Script" uid="uid://w6khyvbrseg7" path="res://core/logic/map.gd" id="1_fwftn"]
 [ext_resource type="PackedScene" uid="uid://bhuwtv3rysx8d" path="res://menu/shaders/in_game_menu.tscn" id="2_5af5r"]
 
-[node name="Node2D" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1152.0
-offset_bottom = -648.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="IGM" type="Node"]
 script = ExtResource("1_fwftn")
 
 [node name="progress" type="ProgressBar" parent="."]
-visible = false
-layout_mode = 0
 offset_left = 40.0
 offset_top = 40.0
 offset_right = 332.0
@@ -37,7 +27,6 @@ position = Vector2(576, 324)
 [node name="InGameMenu" parent="." instance=ExtResource("2_5af5r")]
 
 [node name="spr" type="TextureRect" parent="."]
-layout_mode = 0
 offset_right = 564.0
 offset_bottom = 327.0
 pivot_offset = Vector2(282, 163)
