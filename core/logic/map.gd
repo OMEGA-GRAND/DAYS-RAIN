@@ -8,7 +8,7 @@ var threads = []						# Список потоков
 var squares = {}						# Словарь для хранения квадратов
 var mutex = Mutex.new()					# Мьютекс для защиты общих данных
 var completed_threads = 0				# Счётчик завершённых потоков
-var window_size
+var center
 var node
 var q : float
 var i = false
@@ -21,6 +21,7 @@ var FILEflow_deb_text : String
 	#set = set_get
 ### Будет удалено отсюда.
 
+@onready var cam = $Cam
 @onready var deb = $progress/debug
 
 #func set_get(val : Array):
@@ -103,6 +104,7 @@ func _ready():
 	
 
 func _process(_delta):
+	cam.position = GlobalParam.zero_point
 	$spr.pivot_offset = $spr.size / 2
 	
 	if $spr.texture:
@@ -145,7 +147,7 @@ func _process(_delta):
 	
 	$progress.position = GlobalParam.leftUPcorner
 	$spr.position += Input.get_vector("ui_right", "ui_left", "ui_down", "ui_up") * ($spr.size * (_delta / 6) )
-	if Input.is_action_just_pressed("NONE"):
+	if Input.is_action_just_pressed("Ctrl"):
 		if $spr.texture:
 			$spr.texture = null
 		$progress.visible = true
@@ -338,7 +340,7 @@ func _assemble_image():
 """)
 	# Преобразуем изображение в текстуру
 	var texture = ImageTexture.create_from_image(final_image)
-	$spr.position = GlobalParam.window_size
+	$spr.position = GlobalParam.center
 	$spr.texture = texture
 	final_image.save_png("res://menu/noise.png")
 	print_rich("Текстура успешно применена к TextureRect.")

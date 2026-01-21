@@ -7,7 +7,8 @@ var t
 signal push
 
 func _ready() -> void:
-
+	k = true
+	k = false
 	t = Timer.new()
 	t.wait_time = randf_range(0, 1)
 	add_child(t)
@@ -16,16 +17,51 @@ func _ready() -> void:
 		if i is Sprite2D:
 			posses.append([i.position, i, i.position])
 			posses.append([i.get_child(0).position, i.get_child(0)])
-			
 
 func _on_mouse_entered() -> void:
 	k = true
-
 
 func _on_mouse_exited() -> void:
 	k = false
 
 func _process(delta: float) -> void:
+	if k == false:
+		for i in posses:
+			if i is Array:
+				if len(i) > 2:
+					i[0] = i[2]
+				if len(i) < 3:
+					i[0] = Vector2.ZERO
+				i[0].x = lerp(i[0].x, i[0].x + (randi_range(20, 40) * randf_range(-1, 1)), delta *20)
+				i[0].y = lerp(i[0].y, i[0].y + (randi_range(20, 35) * randf_range(-1, 1)), delta *20)
+				i[0].x = clamp(i[0].x, i[0].x - 1, i[0].x + 1)
+				i[0].y = clamp(i[0].y, i[0].y - 1, i[0].y + 1)
+		for i in posses:
+			if i is Array:
+				if i[1].position != i[0] and len(i[1].name) <= 2:
+					i[1].position = lerp(i[1].position, i[0], delta * 2)
 	if k == true:
 		if Input.is_action_just_pressed("L_mouse"):
 			emit_signal("push", "click")
+		if t.get_time_left() <= 0.1:
+			t.start(randf_range(0, 2))
+			for i in posses:
+				if i is Array:
+					if len(i) > 2:
+						i[0] = i[2]
+					if len(i) < 3:
+						i[0] = Vector2.ZERO
+					i[0].x = lerp(i[0].x, i[0].x + (randi_range(20, 40) * randf_range(-1, 1)), delta *20)
+					i[0].y = lerp(i[0].y, i[0].y + (randi_range(20, 35) * randf_range(-1, 1)), delta *20)
+					i[0].x = clamp(i[0].x, i[0].x - 1, i[0].x + 1)
+					i[0].y = clamp(i[0].y, i[0].y - 1, i[0].y + 1)
+		for i in posses:
+			if i is Array:
+				if i[1].position != i[0] and len(i[1].name) <= 2:
+					i[1].position = lerp(i[1].position, i[0], delta * 2)
+				if len(i[1].name) > 2:
+					i[1].position.x = lerp(i[1].position.x, i[1].position.x + i[0].x + (posses[0].x * randf_range(-1, 1)), delta *60)
+					i[1].position.y = lerp(i[1].position.y, i[1].position.y + i[0].y + (posses[0].y * randf_range(-1, 1)), delta *40)
+					i[0].x = clamp(i[0].x, i[0].x - 1, i[0].x + 1)
+					i[0].y = clamp(i[0].y, i[0].y - 1, i[0].y + 1)
+					i[1].position = lerp(i[1].position, i[0], delta *100) 

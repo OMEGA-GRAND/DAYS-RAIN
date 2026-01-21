@@ -17,4 +17,4 @@ func _process(delta):
 		if is_instance_valid(self):
 			if material.get_shader_parameter("value") >= 0.011:
 				size = DisplayServer.window_get_size()
-				position = GlobalParam.window_size
+				position = GlobalParam.center

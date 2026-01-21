@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkfsqpvnhwtpf"
-path="res://.godot/imported/noise.png-6094a89c8e6a4f9046b12f5add977e13.ctex"
+uid="uid://dj6bmcd23bhpp"
+path="res://.godot/imported/Без названия101_20251113194051.png-15704aab67829240d55b037105f452d0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://menu/noise.png"
-dest_files=["res://.godot/imported/noise.png-6094a89c8e6a4f9046b12f5add977e13.ctex"]
+source_file="res://Без названия101_20251113194051.png"
+dest_files=["res://.godot/imported/Без названия101_20251113194051.png-15704aab67829240d55b037105f452d0.ctex"]
 
 [params]
 

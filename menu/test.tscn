@@ -22,7 +22,6 @@ bbcode_enabled = true
 scroll_following = true
 
 [node name="Cam" type="Camera2D" parent="."]
-position = Vector2(576, 324)
 
 [node name="InGameMenu" parent="." instance=ExtResource("2_5af5r")]
 

@@ -27,7 +27,7 @@ var countOrnament = []
 var Xsize = Vector2(0.15, 0.15)
 ##Коэфициент масштаба элементов IGM.
 
-
+@onready var LU = GlobalParam.zero_point
 
 var shake: float 
 # Коэфициент тряски. При открытом IGM - постоянно увеличивается, иначе - наоборот. Колесо мыши для ручного изменения.
@@ -97,6 +97,7 @@ func _ready():
 		add_child(ssstart)
 		ssstart.name = "ShadowOnStart"
 		start = ssstart
+		
 	shade.visible = false
 	menu.visible = false
 	playsound.play()
@@ -118,6 +119,7 @@ func leverer(lever):
 		kk = 0
 	
 func _process(delta):
+
 	if tt.time_left == 0:
 		tt.stop()
 		l = 1
@@ -131,8 +133,9 @@ func _process(delta):
 			tt.stop()
 			tt.start(3.)
 			winSize = DisplayServer.window_get_size()
-	
-	
+	size = GlobalParam.mainWinSize
+	#start.position = GlobalParam.leftUPcorner
+	print(GlobalParam.leftUPcorner)
 	shshake.emit(["shake", shake])
 	
 	if kk == 1:
@@ -144,7 +147,7 @@ func _process(delta):
 		menu.modulate.a = lerp(menu.modulate.a, 0., delta *7)
 	
 	menu.modulate.a = clampf(menu.modulate.a, 0., 2.)
-	position = lerp(position, Vector2.ZERO, delta)
+	position = lerp(position, GlobalParam.leftUPcorner, 1)
 	
 	
 	one.text = str("к.тряски: ", shake, " вкл/выкл: ", k, """
@@ -195,6 +198,8 @@ func _process(delta):
 		else:
 			k = 0
 			
+	shade.position = GlobalParam.zero_point
+
 	if shade.material.get_shader_parameter("value") <= 0.1:
 		shade.visible = false
 		menu.visible = false
@@ -213,8 +218,10 @@ func _process(delta):
 		shade.visible = true
 		menu.visible = true
 		menu.position = lerp(menu.position, GlobalParam.center + Vector2(randf_range(-shake, shake), randf_range(-shake, shake)), delta * randi_range(0,2))
+
 		if menu.position - GlobalParam.center >= Vector2(DisplayServer.window_get_size()) or menu.position + GlobalParam.center <= -Vector2(DisplayServer.window_get_size()):
 			menu.position = -menu.position
+			
 		
 		one.global_position = Corner1[0].global_position + Vector2(40,30)
 		if GlobalParam.kk == true:

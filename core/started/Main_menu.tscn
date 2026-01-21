@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://y2q82es5mgu2"]
+[gd_scene load_steps=14 format=3 uid="uid://y2q82es5mgu2"]
 
 [ext_resource type="Script" uid="uid://b8y18pygr0bmh" path="res://core/started/startMenu.gd" id="1_6doeh"]
 [ext_resource type="Texture2D" uid="uid://dism5vn6viqw6" path="res://core/started/back.png" id="2_qoe8l"]
@@ -8,10 +8,22 @@
 [ext_resource type="Texture2D" uid="uid://1rvlqbhdo45i" path="res://core/started/front.png" id="6_d2l8k"]
 [ext_resource type="PackedScene" uid="uid://cyj27oksdllmi" path="res://core/started/newgame_buttom.tscn" id="7_aocvl"]
 [ext_resource type="PackedScene" uid="uid://cya4yjfu1gs5o" path="res://core/started/settings_buttom.tscn" id="8_8c43f"]
+[ext_resource type="Shader" uid="uid://nke4lrv0b6jy" path="res://menu/shaders/circleshadow.gdshader" id="9_qoe8l"]
+[ext_resource type="Texture2D" uid="uid://h8k2gh8j0fdl" path="res://core/started/sett/sub_menu_part.png" id="10_3c2sw"]
+[ext_resource type="Script" uid="uid://lmiko3hlnsrg" path="res://sett_menu.gd" id="11_wqcrj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qoe8l"]
+shader = ExtResource("9_qoe8l")
+shader_parameter/value = 0.0
+shader_parameter/u_active = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3c2sw"]
+shader = ExtResource("9_qoe8l")
+shader_parameter/value = 0.0
+shader_parameter/u_active = 0.0
 
 [node name="startmenu" type="Node2D"]
 script = ExtResource("1_6doeh")
-L = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_enabled = false
@@ -19,52 +31,98 @@ limit_enabled = false
 [node name="bcg" type="Node2D" parent="."]
 position = Vector2(576, 324)
 
-[node name="back" type="Parallax2D" parent="bcg"]
+[node name="bcg_back" type="Parallax2D" parent="bcg"]
 repeat_size = Vector2(1025.19, 720.405)
-autoscroll = Vector2(1, 1)
+autoscroll = Vector2(-1, -1)
 repeat_times = 4
 
-[node name="Back" type="Sprite2D" parent="bcg/back"]
+[node name="Back" type="Sprite2D" parent="bcg/bcg_back"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_qoe8l")
 
-[node name="inmass" type="Parallax2D" parent="bcg"]
+[node name="bcg_inmass" type="Parallax2D" parent="bcg"]
 repeat_size = Vector2(1025.19, 720.405)
-autoscroll = Vector2(2, 2)
+autoscroll = Vector2(-2, -2)
 repeat_times = 4
 
-[node name="Inmass" type="Sprite2D" parent="bcg/inmass"]
+[node name="Inmass" type="Sprite2D" parent="bcg/bcg_inmass"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_3c2sw")
 
-[node name="Logo" type="Sprite2D" parent="bcg"]
+[node name="Logo1" type="Sprite2D" parent="bcg"]
+modulate = Color(1.353256, 1.353256, 1.353256, 1)
 position = Vector2(-576, -553)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_wqcrj")
 
-[node name="middle" type="Parallax2D" parent="bcg"]
+[node name="bcg_middle" type="Parallax2D" parent="bcg"]
 repeat_size = Vector2(1025.19, 720.405)
-autoscroll = Vector2(3, 3)
+autoscroll = Vector2(-3, -3)
 repeat_times = 4
 
-[node name="Middle" type="Sprite2D" parent="bcg/middle"]
+[node name="Middle" type="Sprite2D" parent="bcg/bcg_middle"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_octsd")
 
-[node name="front" type="Parallax2D" parent="bcg"]
-modulate = Color(1, 1, 1, 0.5568628)
+[node name="bcg_front" type="Parallax2D" parent="bcg"]
+modulate = Color(1, 1, 1, 0.25882354)
 repeat_size = Vector2(1025.19, 720.405)
-autoscroll = Vector2(4, 4)
+autoscroll = Vector2(-4, -4)
 repeat_times = 4
 
-[node name="Front" type="Sprite2D" parent="bcg/front"]
+[node name="Front" type="Sprite2D" parent="bcg/bcg_front"]
+modulate = Color(1, 1, 1, 0.6627451)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_d2l8k")
 
-[node name="newgame" parent="." instance=ExtResource("7_aocvl")]
+[node name="newgame" parent="bcg" instance=ExtResource("7_aocvl")]
+position = Vector2(-576, -324)
 
-[node name="settings" parent="." instance=ExtResource("8_8c43f")]
-position = Vector2(0, 103)
+[node name="settings" parent="bcg" instance=ExtResource("8_8c43f")]
+position = Vector2(-576, -221)
 
-[connection signal="mouse_entered" from="newgame" to="." method="_on_newgame_mouse_entered"]
-[connection signal="mouse_exited" from="newgame" to="." method="_on_newgame_mouse_exited"]
+[node name="shad_bcg" type="ColorRect" parent="bcg"]
+material = SubResource("ShaderMaterial_qoe8l")
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Logo2" type="Sprite2D" parent="bcg"]
+modulate = Color(1.353256, 1.353256, 1.353256, 0)
+position = Vector2(-714.24, -685.72)
+scale = Vector2(0.008, 0.008)
+texture = ExtResource("4_wqcrj")
+
+[node name="shad" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_3c2sw")
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="sett_submenu" type="Node2D" parent="."]
+script = ExtResource("11_wqcrj")
+
+[node name="SubMenuPart" type="Sprite2D" parent="sett_submenu"]
+position = Vector2(-391, -151)
+texture = ExtResource("10_3c2sw")
+
+[node name="SubMenuPart2" type="Sprite2D" parent="sett_submenu"]
+position = Vector2(376, 398)
+texture = ExtResource("10_3c2sw")
+
+[node name="SubMenuPart3" type="Sprite2D" parent="sett_submenu"]
+position = Vector2(366, -150)
+texture = ExtResource("10_3c2sw")
+
+[node name="SubMenuPart4" type="Sprite2D" parent="sett_submenu"]
+position = Vector2(766, 44)
+texture = ExtResource("10_3c2sw")
+
+[node name="SubMenuPart5" type="Sprite2D" parent="sett_submenu"]
+position = Vector2(751, 507)
+texture = ExtResource("10_3c2sw")
+
+[node name="SubMenuPart6" type="Sprite2D" parent="sett_submenu"]
+texture = ExtResource("10_3c2sw")
+
+[connection signal="now" from="." to="sett_submenu" method="_on_startmenu_now"]
+[connection signal="mouse_entered" from="bcg/newgame" to="." method="_on_newgame_mouse_entered"]
+[connection signal="mouse_exited" from="bcg/newgame" to="." method="_on_newgame_mouse_exited"]
