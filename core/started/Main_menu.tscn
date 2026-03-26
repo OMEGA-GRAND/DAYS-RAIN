@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://y2q82es5mgu2"]
+[gd_scene load_steps=17 format=3 uid="uid://y2q82es5mgu2"]
 
 [ext_resource type="Script" uid="uid://b8y18pygr0bmh" path="res://core/started/startMenu.gd" id="1_6doeh"]
 [ext_resource type="Texture2D" uid="uid://dism5vn6viqw6" path="res://core/started/back.png" id="2_qoe8l"]
@@ -9,8 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://cyj27oksdllmi" path="res://core/started/newgame_buttom.tscn" id="7_aocvl"]
 [ext_resource type="PackedScene" uid="uid://cya4yjfu1gs5o" path="res://core/started/settings_buttom.tscn" id="8_8c43f"]
 [ext_resource type="Shader" uid="uid://nke4lrv0b6jy" path="res://menu/shaders/circleshadow.gdshader" id="9_qoe8l"]
-[ext_resource type="Texture2D" uid="uid://h8k2gh8j0fdl" path="res://core/started/sett/sub_menu_part.png" id="10_3c2sw"]
 [ext_resource type="Script" uid="uid://lmiko3hlnsrg" path="res://sett_menu.gd" id="11_wqcrj"]
+[ext_resource type="Texture2D" uid="uid://cflcy1avm40ru" path="res://menu/appearance/corner.png" id="12_8c43f"]
+[ext_resource type="Script" uid="uid://bt2gw20ps38b6" path="res://menu/bones/scripts/corner.gd" id="13_bwh2v"]
+[ext_resource type="Texture2D" uid="uid://d3b5sd2kp8pvk" path="res://menu/appearance/line.png" id="14_w6sqc"]
+[ext_resource type="Script" uid="uid://qtsul8auo0s8" path="res://menu/bones/scripts/line.gd" id="15_wbxgx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qoe8l"]
 shader = ExtResource("9_qoe8l")
@@ -100,29 +103,550 @@ offset_bottom = 40.0
 [node name="sett_submenu" type="Node2D" parent="."]
 script = ExtResource("11_wqcrj")
 
-[node name="SubMenuPart" type="Sprite2D" parent="sett_submenu"]
-position = Vector2(-391, -151)
-texture = ExtResource("10_3c2sw")
+[node name="SubMenuPart" type="Node2D" parent="sett_submenu"]
+position = Vector2(585, 298)
 
-[node name="SubMenuPart2" type="Sprite2D" parent="sett_submenu"]
-position = Vector2(376, 398)
-texture = ExtResource("10_3c2sw")
+[node name="Corner" type="Sprite2D" parent="sett_submenu/SubMenuPart"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
 
-[node name="SubMenuPart3" type="Sprite2D" parent="sett_submenu"]
-position = Vector2(366, -150)
-texture = ExtResource("10_3c2sw")
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart/Corner"]
+position = Vector2(242, -121)
 
-[node name="SubMenuPart4" type="Sprite2D" parent="sett_submenu"]
-position = Vector2(766, 44)
-texture = ExtResource("10_3c2sw")
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart/Corner"]
+position = Vector2(-121, 242)
 
-[node name="SubMenuPart5" type="Sprite2D" parent="sett_submenu"]
-position = Vector2(751, 507)
-texture = ExtResource("10_3c2sw")
+[node name="Corner2" type="Sprite2D" parent="sett_submenu/SubMenuPart"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
 
-[node name="SubMenuPart6" type="Sprite2D" parent="sett_submenu"]
-texture = ExtResource("10_3c2sw")
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart/Corner2"]
+position = Vector2(242, -121)
 
-[connection signal="now" from="." to="sett_submenu" method="_on_startmenu_now"]
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart/Corner2"]
+position = Vector2(-121, 242)
+
+[node name="Corner3" type="Sprite2D" parent="sett_submenu/SubMenuPart"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart/Corner3"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart/Corner3"]
+position = Vector2(-121, 242)
+
+[node name="Corner4" type="Sprite2D" parent="sett_submenu/SubMenuPart"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart/Corner4"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart/Corner4"]
+position = Vector2(-121, 242)
+
+[node name="Line1" type="Sprite2D" parent="sett_submenu/SubMenuPart"]
+unique_name_in_owner = true
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart/Line1"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart/Line1"]
+position = Vector2(-121, 0)
+
+[node name="Line2" type="Sprite2D" parent="sett_submenu/SubMenuPart"]
+unique_name_in_owner = true
+rotation = 1.57079
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart/Line2"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart/Line2"]
+position = Vector2(-121, 0)
+
+[node name="Line3" type="Sprite2D" parent="sett_submenu/SubMenuPart"]
+unique_name_in_owner = true
+rotation = 3.14159
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart/Line3"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart/Line3"]
+position = Vector2(-121, 0)
+
+[node name="Line4" type="Sprite2D" parent="sett_submenu/SubMenuPart"]
+unique_name_in_owner = true
+rotation = -1.57079
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart/Line4"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart/Line4"]
+position = Vector2(-121, 0)
+
+[node name="SubMenuPart2" type="Node2D" parent="sett_submenu"]
+position = Vector2(585, 298)
+
+[node name="Corner" type="Sprite2D" parent="sett_submenu/SubMenuPart2"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart2/Corner"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart2/Corner"]
+position = Vector2(-121, 242)
+
+[node name="Corner2" type="Sprite2D" parent="sett_submenu/SubMenuPart2"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart2/Corner2"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart2/Corner2"]
+position = Vector2(-121, 242)
+
+[node name="Corner3" type="Sprite2D" parent="sett_submenu/SubMenuPart2"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart2/Corner3"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart2/Corner3"]
+position = Vector2(-121, 242)
+
+[node name="Corner4" type="Sprite2D" parent="sett_submenu/SubMenuPart2"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart2/Corner4"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart2/Corner4"]
+position = Vector2(-121, 242)
+
+[node name="Line1" type="Sprite2D" parent="sett_submenu/SubMenuPart2"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart2/Line1"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart2/Line1"]
+position = Vector2(-121, 0)
+
+[node name="Line2" type="Sprite2D" parent="sett_submenu/SubMenuPart2"]
+rotation = 1.57079
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart2/Line2"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart2/Line2"]
+position = Vector2(-121, 0)
+
+[node name="Line3" type="Sprite2D" parent="sett_submenu/SubMenuPart2"]
+rotation = 3.14159
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart2/Line3"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart2/Line3"]
+position = Vector2(-121, 0)
+
+[node name="Line4" type="Sprite2D" parent="sett_submenu/SubMenuPart2"]
+rotation = -1.57079
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart2/Line4"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart2/Line4"]
+position = Vector2(-121, 0)
+
+[node name="SubMenuPart3" type="Node2D" parent="sett_submenu"]
+position = Vector2(585, 298)
+
+[node name="Corner" type="Sprite2D" parent="sett_submenu/SubMenuPart3"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart3/Corner"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart3/Corner"]
+position = Vector2(-121, 242)
+
+[node name="Corner2" type="Sprite2D" parent="sett_submenu/SubMenuPart3"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart3/Corner2"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart3/Corner2"]
+position = Vector2(-121, 242)
+
+[node name="Corner3" type="Sprite2D" parent="sett_submenu/SubMenuPart3"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart3/Corner3"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart3/Corner3"]
+position = Vector2(-121, 242)
+
+[node name="Corner4" type="Sprite2D" parent="sett_submenu/SubMenuPart3"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart3/Corner4"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart3/Corner4"]
+position = Vector2(-121, 242)
+
+[node name="Line1" type="Sprite2D" parent="sett_submenu/SubMenuPart3"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart3/Line1"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart3/Line1"]
+position = Vector2(-121, 0)
+
+[node name="Line2" type="Sprite2D" parent="sett_submenu/SubMenuPart3"]
+rotation = 1.57079
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart3/Line2"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart3/Line2"]
+position = Vector2(-121, 0)
+
+[node name="Line3" type="Sprite2D" parent="sett_submenu/SubMenuPart3"]
+rotation = 3.14159
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart3/Line3"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart3/Line3"]
+position = Vector2(-121, 0)
+
+[node name="Line4" type="Sprite2D" parent="sett_submenu/SubMenuPart3"]
+rotation = -1.57079
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart3/Line4"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart3/Line4"]
+position = Vector2(-121, 0)
+
+[node name="SubMenuPart4" type="Node2D" parent="sett_submenu"]
+position = Vector2(585, 298)
+
+[node name="Corner" type="Sprite2D" parent="sett_submenu/SubMenuPart4"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart4/Corner"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart4/Corner"]
+position = Vector2(-121, 242)
+
+[node name="Corner2" type="Sprite2D" parent="sett_submenu/SubMenuPart4"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart4/Corner2"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart4/Corner2"]
+position = Vector2(-121, 242)
+
+[node name="Corner3" type="Sprite2D" parent="sett_submenu/SubMenuPart4"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart4/Corner3"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart4/Corner3"]
+position = Vector2(-121, 242)
+
+[node name="Corner4" type="Sprite2D" parent="sett_submenu/SubMenuPart4"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart4/Corner4"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart4/Corner4"]
+position = Vector2(-121, 242)
+
+[node name="Line1" type="Sprite2D" parent="sett_submenu/SubMenuPart4"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart4/Line1"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart4/Line1"]
+position = Vector2(-121, 0)
+
+[node name="Line2" type="Sprite2D" parent="sett_submenu/SubMenuPart4"]
+rotation = 1.57079
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart4/Line2"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart4/Line2"]
+position = Vector2(-121, 0)
+
+[node name="Line3" type="Sprite2D" parent="sett_submenu/SubMenuPart4"]
+rotation = 3.14159
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart4/Line3"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart4/Line3"]
+position = Vector2(-121, 0)
+
+[node name="Line4" type="Sprite2D" parent="sett_submenu/SubMenuPart4"]
+rotation = -1.57079
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart4/Line4"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart4/Line4"]
+position = Vector2(-121, 0)
+
+[node name="SubMenuPart5" type="Node2D" parent="sett_submenu"]
+position = Vector2(585, 298)
+
+[node name="Corner" type="Sprite2D" parent="sett_submenu/SubMenuPart5"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart5/Corner"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart5/Corner"]
+position = Vector2(-121, 242)
+
+[node name="Corner2" type="Sprite2D" parent="sett_submenu/SubMenuPart5"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart5/Corner2"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart5/Corner2"]
+position = Vector2(-121, 242)
+
+[node name="Corner3" type="Sprite2D" parent="sett_submenu/SubMenuPart5"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart5/Corner3"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart5/Corner3"]
+position = Vector2(-121, 242)
+
+[node name="Corner4" type="Sprite2D" parent="sett_submenu/SubMenuPart5"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart5/Corner4"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart5/Corner4"]
+position = Vector2(-121, 242)
+
+[node name="Line1" type="Sprite2D" parent="sett_submenu/SubMenuPart5"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart5/Line1"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart5/Line1"]
+position = Vector2(-121, 0)
+
+[node name="Line2" type="Sprite2D" parent="sett_submenu/SubMenuPart5"]
+rotation = 1.57079
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart5/Line2"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart5/Line2"]
+position = Vector2(-121, 0)
+
+[node name="Line3" type="Sprite2D" parent="sett_submenu/SubMenuPart5"]
+rotation = 3.14159
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart5/Line3"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart5/Line3"]
+position = Vector2(-121, 0)
+
+[node name="Line4" type="Sprite2D" parent="sett_submenu/SubMenuPart5"]
+rotation = -1.57079
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart5/Line4"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart5/Line4"]
+position = Vector2(-121, 0)
+
+[node name="SubMenuPart6" type="Node2D" parent="sett_submenu"]
+position = Vector2(585, 298)
+
+[node name="Corner" type="Sprite2D" parent="sett_submenu/SubMenuPart6"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart6/Corner"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart6/Corner"]
+position = Vector2(-121, 242)
+
+[node name="Corner2" type="Sprite2D" parent="sett_submenu/SubMenuPart6"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart6/Corner2"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart6/Corner2"]
+position = Vector2(-121, 242)
+
+[node name="Corner3" type="Sprite2D" parent="sett_submenu/SubMenuPart6"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart6/Corner3"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart6/Corner3"]
+position = Vector2(-121, 242)
+
+[node name="Corner4" type="Sprite2D" parent="sett_submenu/SubMenuPart6"]
+texture = ExtResource("12_8c43f")
+script = ExtResource("13_bwh2v")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart6/Corner4"]
+position = Vector2(242, -121)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart6/Corner4"]
+position = Vector2(-121, 242)
+
+[node name="Line1" type="Sprite2D" parent="sett_submenu/SubMenuPart6"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart6/Line1"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart6/Line1"]
+position = Vector2(-121, 0)
+
+[node name="Line2" type="Sprite2D" parent="sett_submenu/SubMenuPart6"]
+rotation = 1.57079
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart6/Line2"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart6/Line2"]
+position = Vector2(-121, 0)
+
+[node name="Line3" type="Sprite2D" parent="sett_submenu/SubMenuPart6"]
+rotation = 3.14159
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart6/Line3"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart6/Line3"]
+position = Vector2(-121, 0)
+
+[node name="Line4" type="Sprite2D" parent="sett_submenu/SubMenuPart6"]
+rotation = -1.57079
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("14_w6sqc")
+script = ExtResource("15_wbxgx")
+
+[node name="anchor" type="Marker2D" parent="sett_submenu/SubMenuPart6/Line4"]
+position = Vector2(121, -0.000244558)
+
+[node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart6/Line4"]
+position = Vector2(-121, 0)
+
+[connection signal="now_sett" from="." to="sett_submenu" method="_on_startmenu_now_sett"]
 [connection signal="mouse_entered" from="bcg/newgame" to="." method="_on_newgame_mouse_entered"]
 [connection signal="mouse_exited" from="bcg/newgame" to="." method="_on_newgame_mouse_exited"]

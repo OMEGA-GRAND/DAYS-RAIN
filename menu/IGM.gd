@@ -135,7 +135,7 @@ func _process(delta):
 			winSize = DisplayServer.window_get_size()
 	size = GlobalParam.mainWinSize
 	#start.position = GlobalParam.leftUPcorner
-	print(GlobalParam.leftUPcorner)
+	
 	shshake.emit(["shake", shake])
 	
 	if kk == 1:

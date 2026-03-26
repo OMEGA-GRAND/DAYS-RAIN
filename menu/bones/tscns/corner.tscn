@@ -4,12 +4,11 @@
 [ext_resource type="Script" uid="uid://bt2gw20ps38b6" path="res://menu/bones/scripts/corner.gd" id="2_yju14"]
 
 [node name="Corner" type="Sprite2D"]
-rotation = -1.57079
 texture = ExtResource("1_ccvbi")
 script = ExtResource("2_yju14")
 
 [node name="anchor" type="Marker2D" parent="."]
-position = Vector2(0, 121)
+position = Vector2(242, -121)
 
 [node name="anchor2" type="Marker2D" parent="."]
-position = Vector2(-121, 0)
+position = Vector2(-121, 242)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdngdam4x5vmc"
-path="res://.godot/imported/hint.png-4bbec2983159cd4a57811e9a701bc4a7.ctex"
+uid="uid://qd6wejsg35ld"
+path="res://.godot/imported/project.png-acc8c4789c9817fa059443dfc30f58fd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://core/calm-on-a-rainy-night-(4.5)/hint.png"
-dest_files=["res://.godot/imported/hint.png-4bbec2983159cd4a57811e9a701bc4a7.ctex"]
+source_file="res://menu/appearance/project.png"
+dest_files=["res://.godot/imported/project.png-acc8c4789c9817fa059443dfc30f58fd.ctex"]
 
 [params]
 

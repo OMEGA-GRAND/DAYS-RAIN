@@ -1,7 +1,8 @@
 extends Area2D
 
 @export var k := false
-var posses := [Vector2(30.,30.)]
+@export var posses := [Vector2(30.,30.)]
+var pis := [20., 40., 35.]
 var t
 
 signal push
@@ -32,8 +33,8 @@ func _process(delta: float) -> void:
 					i[0] = i[2]
 				if len(i) < 3:
 					i[0] = Vector2.ZERO
-				i[0].x = lerp(i[0].x, i[0].x + (randi_range(20, 40) * randf_range(-1, 1)), delta *20)
-				i[0].y = lerp(i[0].y, i[0].y + (randi_range(20, 35) * randf_range(-1, 1)), delta *20)
+				i[0].x = lerp(i[0].x, i[0].x + (randi_range(pis[0], pis[1]) * randf_range(-1, 1)), delta *20)
+				i[0].y = lerp(i[0].y, i[0].y + (randi_range(pis[0], pis[2]) * randf_range(-1, 1)), delta *20)
 				i[0].x = clamp(i[0].x, i[0].x - 1, i[0].x + 1)
 				i[0].y = clamp(i[0].y, i[0].y - 1, i[0].y + 1)
 		for i in posses:
@@ -43,6 +44,7 @@ func _process(delta: float) -> void:
 	if k == true:
 		if Input.is_action_just_pressed("L_mouse"):
 			emit_signal("push", "click")
+			$CollisionShape2D.set_disabled(true)
 		if t.get_time_left() <= 0.1:
 			t.start(randf_range(0, 2))
 			for i in posses:
@@ -51,8 +53,8 @@ func _process(delta: float) -> void:
 						i[0] = i[2]
 					if len(i) < 3:
 						i[0] = Vector2.ZERO
-					i[0].x = lerp(i[0].x, i[0].x + (randi_range(20, 40) * randf_range(-1, 1)), delta *20)
-					i[0].y = lerp(i[0].y, i[0].y + (randi_range(20, 35) * randf_range(-1, 1)), delta *20)
+					i[0].x = lerp(i[0].x, i[0].x + (randi_range(pis[0], pis[1]) * randf_range(-1, 1)), delta *20)
+					i[0].y = lerp(i[0].y, i[0].y + (randi_range(pis[0], pis[2]) * randf_range(-1, 1)), delta *20)
 					i[0].x = clamp(i[0].x, i[0].x - 1, i[0].x + 1)
 					i[0].y = clamp(i[0].y, i[0].y - 1, i[0].y + 1)
 		for i in posses:

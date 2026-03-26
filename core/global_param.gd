@@ -6,6 +6,8 @@ var mFPS = round(FPS / 4)
 
 var goods = [preload("res://hint.png"), NAN]
 
+@onready var glAnchor
+
 var t
 # Таймер для перемещения этого синглтона поверх активной(ых) сцен.
 var tT 
@@ -40,10 +42,12 @@ var xy_res
 
 var audios
 
-var settings = [0.3, true, [DisplayServer.WINDOW_MODE_FULLSCREEN, DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN, DisplayServer.WINDOW_MODE_WINDOWED], false]
+var settings = [0.3, false, [DisplayServer.WINDOW_MODE_FULLSCREEN, DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN, DisplayServer.WINDOW_MODE_WINDOWED], false, ]
 # Массив настроек, изменять с осторожностью
-#1. Чувствительность мыши
-#2. Авто-расширение окна игры (да/нет) (отключает и включает переключение размера окна по кнопкам соответсвенно)
+#0. Чувствительность мыши
+#1. Авто-расширение окна игры (да/нет) (отключает и включает переключение размера окна по кнопкам соответсвенно)
+#2. Варианты режима окна игры.
+#3.
 
 var mouse_sensitivity = [settings[0], settings[0]/100, 0.0]
 
@@ -98,6 +102,10 @@ func nod(xy) -> Vector2i:
 	return Vector2i(xy.x / x, xy.y / x)
 	
 func _ready():
+	if max_resolution <= resolutions[0]:
+		settings[1] = false
+		DisplayServer.window_set_size(resolutions[0])
+		DisplayServer.window_set_mode(settings[2][0])
 	xy_res = nod(max_resolution)
 	AudioServer.add_bus()
 	AudioServer.add_bus()
@@ -152,8 +160,9 @@ func _process(delta):
 		center = Vector2(zero_point + (get_viewport_rect().size / 2))
 		leftUPcorner = Vector2(zero_point - (get_viewport_rect().size / 2))
 	if get_tree().get_root().get_child(0) as Node2D and get_viewport().get_camera_2d():
-		zero_point = Vector2(-get_viewport().get_camera_2d().get_viewport_rect().size / 2)
-		center = zero_point - Vector2(get_viewport().get_camera_2d().get_viewport_rect().position / 2)
+		glAnchor = get_viewport().get_camera_2d().position
+		zero_point = glAnchor - Vector2(get_viewport().get_camera_2d().get_viewport_rect().size / 2)
+		center = glAnchor
 		leftUPcorner = zero_point
 	if mainWinSize <= max_resolution and screenmode == "оконный":
 		DisplayServer.window_set_position((max_resolution / 2) - (mainWinSize / 2))
@@ -238,10 +247,8 @@ func _process(delta):
 		||| Увеличивать/уменьшать тряску меню можно прокручивая колесо мыши.
 		||| Тряска уменьшается со временем, когда меню закрыто, колесо мыши ничего не делает.
 				Что бы запустить генерацию шума - нажми Ctrl [color=black][bgcolor=white](временно отключено, только закроет эту подсказу)[/bgcolor][/color].
-		||| Генерация шума занимает определённое время, а по достижению 89% проект завсинет - это нормально.
-		||| По окончанию генерации на весь экран будет показана картинка.
-		||| Картинку можно будет двигать стрелочками на клавиатуре.
-		||| Масштаб картинки можно будет менять на колёсико мыши.
+		||| Генерация шума занимает определённое время, в зависимости от выбранного разрешения.
+
 				Что бы убрать эту подсказку - открой denugmenu или запусти генерацию.
 		[color=green][bgcolor=black]DEBUG: limitOutput: """, ProjectSettings.get_setting("network/limits/debugger/max_chars_per_second"), " V-Sync: ", DisplayServer.window_get_vsync_mode(), " (0=False, 1=True)" ,"[/bgcolor][/color]"))
 			if Input.is_action_just_pressed("Shift") or Input.is_action_just_pressed("Ctrl"):
@@ -284,7 +291,8 @@ func _process(delta):
 Пульс: """, snappedf(nodes[nodes.find("startmenu") + 1].L[0], 0.01), """
 Пуль замедляется.""")
 			cursor_label.position = get_viewport().get_mouse_position() + Vector2(10,10)
-			debug_label.text = str("currentmaxFPS[", Engine.max_fps ,"]   maxFPS[", FPS, "]   minFPS[", mFPS, "]   FPS[", Engine.get_frames_per_second(),"""]
+			if settings[1] == true:
+				debug_label.text = str("currentmaxFPS[", Engine.max_fps ,"]   maxFPS[", FPS, "]   minFPS[", mFPS, "]   FPS[", Engine.get_frames_per_second(),"""]
 Важная инфа: """, "сенса: ", mouse_sensitivity, " Положение мыши: ", get_viewport().get_mouse_position(), """
 Режим окна игры: """, screenmode, """
 Допустимое разрешение экрана: """, max_resolution, """
@@ -294,6 +302,12 @@ func _process(delta):
 """,tT.wait_time , """
 """,clampf(tT.time_left / tT.wait_time, 0.01,1.), """
 """, xy_res.x / lerp(0, 10, clampf(tT.time_left / tT.wait_time, 0.01,1.)))
+			else:
+				debug_label.text = str("currentmaxFPS[", Engine.max_fps ,"]   maxFPS[", FPS, "]   minFPS[", mFPS, "]   FPS[", Engine.get_frames_per_second(),"""]
+Важная инфа: """, "сенса: ", mouse_sensitivity, " Положение мыши: ", get_viewport().get_mouse_position(), """
+Режим окна игры: """, screenmode, """
+Допустимое разрешение экрана: """, max_resolution, """
+Позиция окна на экране: """, DisplayServer.window_get_position(), " Разрешение: ", mainWinSize, " Соотношение экрана: ", xy_res, " Центр: ", -center, " Левый верхний угол, он же нулевая точка: ", leftUPcorner + (-center))
 			
 			debug_control.position = leftUPcorner
 			debug_control.visible = true
