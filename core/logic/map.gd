@@ -18,14 +18,15 @@ var progress = 100. / (2 + ((sizi.x * sizi.y) / (square_size.x * square_size.y))
 var flow_deb_text : String
 var FILEflow_deb_text : String
 var texture
+var state
 
 @onready var cam = $Cam
 @onready var deb = $progress/debug
 
 signal imge_comple
+signal imge_state
 
 func _ready():
-	print(progress)
 	$progress.step = progress
 	$progress.visible = false
 	pass
@@ -191,7 +192,6 @@ func _generate_square(x, y, id):
 	if completed_threads == (sizi.x / square_size.x) * (sizi.y / square_size.y):
 		completed_threads = 0
 		call_deferred("_check_threads")
-		call_deferred("_assemble_image")
 		mutex.lock()
 		FILEflow_deb_text += str("""Потоки завершены, завершение генерации, подготовка изображения, очистка потоков.. |
 """)
@@ -214,6 +214,7 @@ func _check_threads():
 	FILEflow_deb_text += str("""Потоки очищены. |
 """)
 	q += progress
+	call_deferred("_assemble_image")
 
 func _assemble_image():
 	FILEflow_deb_text += str("""Собираю изображение.. |
@@ -249,9 +250,13 @@ func _assemble_image():
 	FILEflow_deb_text += str("""Изображение собрано, пребразование в текстуру.. |
 """)
 	# Преобразуем изображение в текстуру
+	state = randf()
+	emit_signal("imge_state", state)
+	final_image.set_meta("realOrNot", state)
 	texture = ImageTexture.create_from_image(final_image)
+	
+	
 	final_image.save_png("res://menu/noise.png")
-	print_rich("Текстура успешно создана.")
 	FILEflow_deb_text += str("""Ггенерация завершена. |
 """)
 	i = false
@@ -275,4 +280,4 @@ func _assemble_image():
 			file_log_gen.store_string(ii[K - 1])
 		file_log_gen.close()
 	flow_deb_text = ""
-	emit_signal("imge_comple", texture)
+	emit_signal("imge_comple", final_image)

@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4r15mb2jn1yg"]
+
+[sub_resource type="GDScript" id="GDScript_3ebo7"]
+script/source = "extends Node
+
+@onready var one = $Area2D/CollisionShape2D
+@onready var two = $Area2D
+@onready var dot = $Marker2D
+var k : bool
+var l := false
+
+func _ready() -> void:
+	DisplayServer.window_set_size(Vector2i(500,500))
+	DisplayServer.window_set_position((DisplayServer.screen_get_size() / 2) - (DisplayServer.window_get_size() / 2))
+	one.shape.size = Vector2i(DisplayServer.window_get_size().x, 60)
+	@warning_ignore(\"integer_division\")
+	one.position = Vector2i((one.shape.size.x / 2), -(one.shape.size.y / 2) + (one.shape.size.y / 2))
+
+
+func _process(_delta: float) -> void:
+	if k == true:
+		if l == false:
+			dot.position = get_tree().root.get_viewport().get_mouse_position()
+		if Input.is_action_pressed(\"L_mouse\"): 
+			l = true
+			get_tree().root.position += Vector2i(lerp(Vector2(0,0), Vector2(dot.position) - Vector2(DisplayServer.window_get_size().x / 2, 15), 60 * _delta) )
+			l = false
+			await get_tree().process_frame 
+
+	pass
+
+
+
+
+func _mouse(arg: bool) -> void:
+	match arg:
+		true:
+			k = true
+		false:
+			k = false
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85qoj"]
+
+[node name="setting_up" type="Node"]
+script = SubResource("GDScript_3ebo7")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_85qoj")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_mouse" binds= [true]]
+[connection signal="mouse_exited" from="Area2D" to="." method="_mouse" binds= [false]]

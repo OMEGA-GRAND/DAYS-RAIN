@@ -2,7 +2,6 @@ extends Node3D
 
 @export var chanks = 7
 var cube = []
-var map
 
 
 func _ready():
@@ -13,12 +12,7 @@ func _ready():
 		GlobalParam.nodes.append($IGM)
 		GlobalParam.nodes.append($character.name)
 		GlobalParam.nodes.append($character)
-	
-	map = FastNoiseLite.new()
-	map.noise_type = FastNoiseLite.TYPE_CELLULAR
-	map.set_cellular_distance_function(FastNoiseLite.DISTANCE_MANHATTAN)
-	$spr.set_texture(map.get_image(chanks * 6, chanks * 6))
-	#$spr.size = Vector2(DisplayServer.window_get_size())
+
 	var x1 = 0
 	var y1 = 0
 	var pos = 0

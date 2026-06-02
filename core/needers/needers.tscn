@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://mypcn3yrhy0y"]
 
-[ext_resource type="Script" uid="uid://dfpg4ca1bs4n8" path="res://core/needers/needersControl.gd" id="1_5x3r0"]
-[ext_resource type="Script" uid="uid://b6sablgfm7k8k" path="res://core/needers/needers_CORE.gd" id="2_o7rpd"]
+[ext_resource type="Script" uid="uid://d206i1upa2btw" path="res://core/needers/controller.gd" id="1_5x3r0"]
+[ext_resource type="Script" uid="uid://dh6rngdc7m64v" path="res://core/needers/needers_feelengs.gd" id="1_argtp"]
 
 [node name="Controller" type="Node"]
 script = ExtResource("1_5x3r0")
 
-[node name="LogicNeeders" type="Node" parent="."]
-script = ExtResource("2_o7rpd")
+[node name="ControlChar" type="Node" parent="."]
 
-[node name="LogicRotting" type="Node" parent="."]
+[node name="feelengs" type="Node" parent="ControlChar"]
+script = ExtResource("1_argtp")
 
-[node name="Logic" type="Node" parent="."]
+[node name="health" type="Node" parent="ControlChar"]

@@ -81,7 +81,7 @@ func _ready() -> void:
 		GlobalParam.nodes.append($bcg/settings)
 		GlobalParam.nodes.append("bcg")
 		GlobalParam.nodes.append(backs)
-	sig_nc.new.connect(new)
+	sig_nc.newgame.connect(newg)
 	sig_sett.push.connect(sett)
 	soundloudnoise = AudioStreamPlayer.new()
 	soundpulse = AudioStreamPlayer.new()
@@ -128,7 +128,6 @@ func _ready() -> void:
 			fore.append(float(i))
 		return [tree, fore]
 		).call()
-	print(hash_data[8])
 	settmenu.modulate.a = 0.
 	
 func _process(delta: float) -> void:
@@ -147,7 +146,6 @@ func _process(delta: float) -> void:
 			for i in range(3).size():
 				sig_nc.pis[i] = lerp(sig_nc.pis[i], hash_data[8][1][i] * 100, delta * 5)
 				sig_sett.pis[i] = lerp(sig_sett.pis[i], hash_data[8][0][i] * 100, delta * 5)
-				print(sig_nc.pis[i], " ", sig_sett.pis[i])
 				if hash_data[8][1][i] < sig_nc.pis[i] and hash_data[8][0][i] < sig_sett.pis[i]:
 					hash_data[7][1][0] = lerp(hash_data[7][1][0], Color(hash_data[7][0][0] / 10, 1.0), delta)
 					hash_data[7][1][1] = lerp(hash_data[7][1][1], Color(hash_data[7][0][1] / 10, 1.0), delta)
@@ -229,7 +227,7 @@ func _process(delta: float) -> void:
 		get_tree().quit()
 	pass
 
-func new(argnew):
+func newg(argnew):
 	print("ОПА ", argnew)
 	p[0] = 1
 

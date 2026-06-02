@@ -5,7 +5,7 @@ extends Area2D
 var pis := [20., 40., 35.]
 var t
 
-signal new 
+signal newgame
 
 func _ready() -> void:
 	k = true
@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 					i[1].position = lerp(i[1].position, i[0], delta * 2)
 	if k == true:
 		if Input.is_action_just_pressed("L_mouse"):
-			emit_signal("new", "newest")
+			emit_signal("newgame", "newest")
 			$CollisionShape2D.set_disabled(true)
 		if t.get_time_left() <= 0.1:
 			t.start(randf_range(0, 2))

@@ -1,14 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://ci688oit7hnud"]
+[gd_scene load_steps=6 format=3 uid="uid://ci688oit7hnud"]
 
 [ext_resource type="Script" uid="uid://cvt3qftwdxnls" path="res://core/logic/main_world.gd" id="1_67rwd"]
 [ext_resource type="PackedScene" uid="uid://b0qlav8kioxof" path="res://char.tscn" id="1_qkqsl"]
 [ext_resource type="Script" uid="uid://dfs26xn1qc7b0" path="res://terrain.gd" id="2_3etub"]
 [ext_resource type="PackedScene" uid="uid://bgjt01tgm1ly2" path="res://menu/test.tscn" id="2_y4qpj"]
+[ext_resource type="Script" uid="uid://cmiemwmn2rs5u" path="res://time.gd" id="5_whfra"]
 
 [node name="main" type="Node3D"]
 script = ExtResource("1_67rwd")
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="GLOBALMAP" type="Node3D" parent="."]
 script = ExtResource("2_3etub")
 
 [node name="spr" type="Sprite3D" parent="."]
@@ -19,3 +20,6 @@ script = ExtResource("2_3etub")
 transform = Transform3D(1, 0, 0, 0, 0.668962, 0.743297, 0, -0.743297, 0.668962, -3.5838, 14.2574, 25.6265)
 
 [node name="character" parent="." instance=ExtResource("1_qkqsl")]
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("5_whfra")

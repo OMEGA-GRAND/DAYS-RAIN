@@ -4,6 +4,7 @@ var FPS = round((func(): if DisplayServer.screen_get_refresh_rate() == -1: retur
 var mFPS = round(FPS / 4)
 # Настройки FPS исходя из герцовки монитора или по стандарту.
 
+
 var goods = [preload("res://hint.png"), NAN]
 
 @onready var glAnchor
@@ -42,12 +43,23 @@ var xy_res
 
 var audios
 
-var settings = [0.3, false, [DisplayServer.WINDOW_MODE_FULLSCREEN, DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN, DisplayServer.WINDOW_MODE_WINDOWED], false, ]
+var bases = [0.3, 
+				false, 
+				[DisplayServer.WINDOW_MODE_FULLSCREEN, DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN, DisplayServer.WINDOW_MODE_WINDOWED], 
+				false,
+				FileAccess,
+				]
+var settings = [0.3, 
+				false, 
+				[DisplayServer.WINDOW_MODE_FULLSCREEN, DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN, DisplayServer.WINDOW_MODE_WINDOWED], 
+				false,
+				""
+				]
 # Массив настроек, изменять с осторожностью
 #0. Чувствительность мыши
 #1. Авто-расширение окна игры (да/нет) (отключает и включает переключение размера окна по кнопкам соответсвенно)
 #2. Варианты режима окна игры.
-#3.
+#3. Не назначено
 
 var mouse_sensitivity = [settings[0], settings[0]/100, 0.0]
 
@@ -74,11 +86,8 @@ var nodes = []
 # Опционально можно использовать для редактирования сцен. 
 # (имею ввиду удаление, добавление и перемещение нод, их редактирование в процессе работы проекта из этого скрипта)
 
+## Должно использоваться для быстрого переключения между разными состояниями проекта. Возможные значения: "Menu" - состояние главного меню игры, игровая логика отключена.  "InGame" - состояние игры, т.е. запуск игрового мира, генерация ландшавта и так далее. #Будет дополняться
 var stage : String = "InGame"
-### Должно использоваться для быстрого переключения между разными состояниями проекта. Возможные значения ниже.
-# "InGame" - состояние игры, т.е. запуск игрового мира, генерация ландшавта и так далее.
-# Будет дополняться....
-#
 
 func screens(mode):
 	if mode == 0:
@@ -101,7 +110,42 @@ func nod(xy) -> Vector2i:
 		x = temp
 	return Vector2i(xy.x / x, xy.y / x)
 	
+func ABORT(source : String, reason : String):##Используется для аварийного закрытия проекта. Использование: "source" - (func(): if get_path() == get_path_to($none):  return str(name) else: return get_path()).call() ; "reason" - информация, передаваемая дополнительно.
+	var crush_report
+	crush_report = FileAccess.open("res://core/crush_report.txt", FileAccess.WRITE)
+	crush_report.store_line(str("""Произошёл краш проекта. 
+Нода или скрипт, отрапортировавший об ошибке располоджен по пути: """, source, """
+Дополнительная информация, которую нода или скрипт отправил дополнитьельно: """, reason))
+	crush_report.close()
+	if OS.has_feature("editor"):
+		printerr(reason)
+	OS.shell_open(crush_report.get_path_absolute())
+	get_tree().quit()
+
+
+func download_save():
+	pass
+
+func upload_save():
+	pass
+
+
 func _ready():
+	if OS.get_name() == "Windows":
+		if (
+			func(): 
+				var SHAD_k = 1
+				var SHAD_TF : bool
+				var SHAD_a = DirAccess.get_drive_count()
+				if SHAD_k == SHAD_a and SHAD_TF == false:
+					ABORT( (func(): if get_path() == get_path_to($none):  return str(name) else: return get_path()).call(), """ОТСУТСТВУЕТ ДИСК С НАЗВАНИЕМ "Д" ИЛИ "D", ИГРА НЕ БУДЕТ ЗАПУЩЕНА БЕЗ НАЛИЧИЯ ЭТОГО ВИРТУАЛЬНОГО ДИСКА! ЗАХЛАМЛЯТЬ ПАМЯТЬ ДИСКА, НА КОТОРОМ УСТАНОВЛЕНА ОПЕРАЦИОННАЯ СИСТЕМА - ВРЕДНО ДЛЯ КОМПЬЮТЕРА, ЭТО СКАЖЕТСЯ НА ПРОИЗВОДИТЕЛЬНОСТИ И МОЖЕТ ВЫЗЫВАТЬ ОШИБКИ!""" )
+				for i in SHAD_a: 
+					if DirAccess.get_drive_name(i) != "C" and DirAccess.get_drive_name(i) != "С":
+						return true
+				
+					
+				).call() == true:
+			pass
 	if max_resolution <= resolutions[0]:
 		settings[1] = false
 		DisplayServer.window_set_size(resolutions[0])
@@ -111,33 +155,39 @@ func _ready():
 	AudioServer.add_bus()
 	AudioServer.generate_bus_layout()
 	t = Timer.new()
-
 	t.set_wait_time(1)
 	t.set_one_shot(true)
 	Win.borderless = true
 	#DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_ALWAYS_ON_TOP, true)
 	mouse_sensitivity[2] = settings[0]
 	Win.set_max_size(max_resolution)
+	ProjectSettings.set_as_basic("network/limits/debugger/max_chars_per_second", true)
 	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
-	add_child(debug_control)
-	debug_control.add_child(debug_label)
-	debug_control.add_child(cursor_label)
-	debug_control.set_as_top_level(true)
-	add_child(start_label)
-	start_label.set_as_top_level(true)
 	
-	ProjectSettings.set_as_basic("network/limits/debugger/max_chars_per_second", true)
-
 	### Далее подключается исключительно временная, дебаг-логика, для проверки чего-либо. 
+	if a == false:
+		add_child(debug_control)
+		debug_control.add_child(debug_label)
+		debug_control.add_child(cursor_label)
+		debug_control.set_as_top_level(true)
+		add_child(start_label)
+		start_label.set_as_top_level(true)
+		pass
+	
+
+	
+
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			pass
 
+
 func _process(delta):
+	Engine.max_fps = FPS
 	mainWinSize = Win.get_size()
 	Win.size.x = clamp(Win.size.x, Win.get_min_size().x, Win.get_max_size().x) 
 	Win.size.y = clamp(Win.size.y, Win.get_min_size().y, Win.get_max_size().y) 
@@ -145,7 +195,6 @@ func _process(delta):
 		t.stop() 
 		get_tree().get_root().move_child.call_deferred(self, -1)
 	screenmode = DisplayServer.window_get_mode()
-	Engine.max_fps = FPS
 	if Input.is_action_just_pressed("Q") or Input.is_action_just_pressed("1st_side_mouse"):
 		if DisplayServer.window_get_mode() == settings[2][2]:
 			DisplayServer.window_set_mode(settings[2][0])
@@ -165,7 +214,8 @@ func _process(delta):
 		center = glAnchor
 		leftUPcorner = zero_point
 	if mainWinSize <= max_resolution and screenmode == "оконный":
-		DisplayServer.window_set_position((max_resolution / 2) - (mainWinSize / 2))
+		if get_tree().current_scene.name != "setting_up":
+			DisplayServer.window_set_position((max_resolution / 2) - (mainWinSize / 2))
 	
 	if true:
 		var L
@@ -221,6 +271,8 @@ func _process(delta):
 			Win.size.y += xy_res.y / lerp(0, 10, clampf(tT.time_left / tT.wait_time, 0.01,1.))
 		
 	if a == false:
+		if Input.is_action_just_pressed("ui_cancel"):
+			ABORT((func(): if get_path() == get_path_to($none):  return str(name) else: return get_path()).call(), "Работа проекта прервана намеренно.")
 		if k == false:
 			start_label.position = leftUPcorner
 			start_label.size = Vector2i(1000, 1000)

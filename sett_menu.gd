@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 							allX.append(F * 4)
 						5: 
 							allX.append(F * 5)
-				for i in range(1, 5):
+				for i in range(1, 5): 
 					k = i
 					match k:
 						1:
@@ -90,17 +90,17 @@ func _process(delta: float) -> void:
 					nodes[i-1].modulate.a = alpha[i-1]
 			
 			nodes[0].position = Vector2(b[2][0], GlobalParam.center.y)
-			nodes[0].scale = Vector2i(1, 1)
+			nodes[0].scale = Vector2(0.15,0.15)
 			nodes[1].position = Vector2(b[2][1], GlobalParam.center.y)
-			nodes[1].scale = Vector2i(1, 1)
+			nodes[1].scale = Vector2(0.15,0.15)
 			nodes[2].position = lerp(Vector2(b[2][2], b[3][0]), Vector2(b[2][3] ,b[3][0]), 0.5)
-			nodes[2].scale = Vector2i(1, 1)
+			nodes[2].scale = Vector2(0.15,0.15)
 			nodes[3].position = lerp(Vector2(b[2][2], b[3][3]), Vector2(b[2][3], b[3][1]), 0.5)
-			nodes[3].scale = Vector2i(1,1)
+			nodes[3].scale = Vector2(0.15,0.15)
 			nodes[4].position = lerp(Vector2(b[2][3], b[3][0]), Vector2(b[2][4], b[3][0]), 0.5)
-			nodes[4].scale = Vector2i(1,1)
+			nodes[4].scale = Vector2(0.15,0.15)
 			nodes[5].position = lerp(Vector2(b[2][3], b[3][3]), Vector2(b[2][4], b[3][1]), 0.5)
-			nodes[5].scale = Vector2i(1,1)
+			nodes[5].scale = Vector2(0.15,0.15)
 			
 				
 		

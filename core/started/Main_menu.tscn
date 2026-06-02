@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://y2q82es5mgu2"]
+[gd_scene load_steps=18 format=3 uid="uid://y2q82es5mgu2"]
 
 [ext_resource type="Script" uid="uid://b8y18pygr0bmh" path="res://core/started/startMenu.gd" id="1_6doeh"]
 [ext_resource type="Texture2D" uid="uid://dism5vn6viqw6" path="res://core/started/back.png" id="2_qoe8l"]
@@ -24,6 +24,10 @@ shader_parameter/u_active = 0.0
 shader = ExtResource("9_qoe8l")
 shader_parameter/value = 0.0
 shader_parameter/u_active = 0.0
+
+[sub_resource type="GDScript" id="GDScript_aocvl"]
+script/source = "extends Node2D
+"
 
 [node name="startmenu" type="Node2D"]
 script = ExtResource("1_6doeh")
@@ -105,6 +109,7 @@ script = ExtResource("11_wqcrj")
 
 [node name="SubMenuPart" type="Node2D" parent="sett_submenu"]
 position = Vector2(585, 298)
+script = SubResource("GDScript_aocvl")
 
 [node name="Corner" type="Sprite2D" parent="sett_submenu/SubMenuPart"]
 texture = ExtResource("12_8c43f")
