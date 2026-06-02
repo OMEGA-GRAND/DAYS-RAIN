@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://civpnu3l8x1i3"
+path="res://.godot/imported/Cartoon Propeller (Loop) Light.wav-ead6737db6dad5880db0c21e3c319859.sample"
+
+[deps]
+
+source_file="res://FMOD/fmod/Assets/Cartoon Propeller (Loop) Light.wav"
+dest_files=["res://.godot/imported/Cartoon Propeller (Loop) Light.wav-ead6737db6dad5880db0c21e3c319859.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

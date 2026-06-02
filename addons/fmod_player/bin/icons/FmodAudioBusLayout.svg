@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: url(#_未命名的渐变-3);
+      }
+
+      .cls-3 {
+        fill: url(#_未命名的渐变);
+      }
+
+      .cls-4 {
+        fill: url(#_未命名的渐变-2);
+      }
+
+      .cls-5 {
+        clip-path: url(#clippath-2);
+      }
+
+      .cls-6 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <linearGradient id="_未命名的渐变" data-name="未命名的渐变" x1="4" y1="15" x2="4" y2="1" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff5f5f"/>
+      <stop offset=".5" stop-color="#e1da5b"/>
+      <stop offset="1" stop-color="#5fff97"/>
+    </linearGradient>
+    <linearGradient id="_未命名的渐变-2" data-name="未命名的渐变" x1="12" y1="14.36" x2="12" y2="1.22" xlink:href="#_未命名的渐变"/>
+    <clipPath id="clippath">
+      <rect class="cls-1" width="16" height="16"/>
+    </clipPath>
+    <clipPath id="clippath-2">
+      <path class="cls-1" d="M13.04,7.28c-.51.33-.88.75-1.13,1.27-.2.4-.3.89-.3,1.47v5.09h2.25v-2.31h1.01v-2.36h-1.01v-.2c0-.35.08-.62.23-.81.15-.19.37-.28.66-.28.02,0,.06,0,.11,0v-2.36h-.24c-.55,0-1.08.16-1.59.48"/>
+    </clipPath>
+    <linearGradient id="_未命名的渐变-3" data-name="未命名的渐变" x1=".99" y1="16" x2="-.65" y2="16" gradientTransform="translate(-119.87 6.79) rotate(90) scale(8.32 -8.32)" xlink:href="#_未命名的渐变"/>
+  </defs>
+  <path class="cls-3" d="M5,1h-2c-1.1,0-2,.9-2,2v10c0,1.1.9,2,2,2h2c1.1,0,2-.9,2-2V3c0-1.1-.9-2-2-2ZM6,13c0,.55-.45,1-1,1h-2c-.55,0-1-.45-1-1V3c0-.55.45-1,1-1h2c.55,0,1,.45,1,1v10Z"/>
+  <path class="cls-4" d="M15,3c0-1.1-.9-2-2-2h-2c-1.1,0-2,.9-2,2v4.51l6-3.02v-1.49Z"/>
+  <g class="cls-6">
+    <g class="cls-5">
+      <rect class="cls-2" x="11.61" y="6.79" width="3.25" height="8.32"/>
+    </g>
+  </g>
+</svg>

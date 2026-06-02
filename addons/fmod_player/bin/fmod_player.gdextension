@@ -1,0 +1,30 @@
+[configuration]
+
+entry_symbol = "fmod_player_init"
+compatibility_minimum = "4.1"
+reloadable = true
+
+[libraries]
+
+windows.debug.x86_64 = "fmod_player.windows.template_debug.x86_64.dll"
+windows.release.x86_64 = "fmod_player.windows.template_release.x86_64.dll"
+android.debug.arm64 = "libfmod_player.android.template_debug.arm64.so"
+android.release.arm64 = "libfmod_player.android.template_release.arm64.so"
+
+[icons]
+
+FmodAudioStreamPlayer = "icons/FmodAudioStreamPlayer.svg"
+FmodAudioStreamPlayer2D = "icons/FmodAudioStreamPlayer2D.svg"
+FmodAudioStreamPlayer3D = "icons/FmodAudioStreamPlayer3D.svg"
+FmodAudioStream = "icons/FmodAudioStream.svg"
+FmodAudioBusLayout = "icons/FmodAudioBusLayout.svg"
+FmodGeometryInstance3D = "icons/FmodGeometryInstance3D.svg"
+FmodReverbZone3D = "icons/FmodReverbZone3D.svg"
+
+[dependencies]
+windows.debug.x86_64 = {
+    "fmod.dll" : "",
+}
+windows.release.x86_64 = {
+    "fmod.dll" : "",
+}
