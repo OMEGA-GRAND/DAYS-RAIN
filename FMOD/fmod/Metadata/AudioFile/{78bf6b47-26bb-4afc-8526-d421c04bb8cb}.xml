@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{78bf6b47-26bb-4afc-8526-d421c04bb8cb}">
+		<property name="assetPath">
+			<value>SAUCISSE.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.99655328798185938</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{adc43fc8-2e0f-4181-a66a-7f85f565d66c}</destination>
+		</relationship>
+	</object>
+</objects>
