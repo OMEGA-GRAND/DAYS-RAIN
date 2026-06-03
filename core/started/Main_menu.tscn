@@ -29,6 +29,8 @@ shader_parameter/u_active = 0.0
 script/source = "extends Node2D
 "
 
+[sub_resource type="FmodAudioStream" id="FmodAudioStream_aocvl"]
+
 [node name="startmenu" type="Node2D" unique_id=272279018]
 script = ExtResource("1_6doeh")
 
@@ -651,6 +653,12 @@ position = Vector2(121, -0.000244558)
 
 [node name="anchor2" type="Marker2D" parent="sett_submenu/SubMenuPart6/Line4" unique_id=1154010396]
 position = Vector2(-121, 0)
+
+[node name="Node" type="Node" parent="." unique_id=771840425]
+
+[node name="FmodAudioStreamPlayer" type="FmodAudioStreamPlayer" parent="Node" unique_id=631969920]
+stream = SubResource("FmodAudioStream_aocvl")
+stream_paused = true
 
 [connection signal="now_sett" from="." to="sett_submenu" method="_on_startmenu_now_sett"]
 [connection signal="mouse_entered" from="bcg/newgame" to="." method="_on_newgame_mouse_entered"]

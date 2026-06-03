@@ -22,9 +22,14 @@ run/main_scene="uid://y2q82es5mgu2"
 config/features=PackedStringArray("4.6", "Forward Plus")
 run/delta_smoothing=false
 
+[audio]
+
+buses/default_bus_layout="uid://b3brc7l1bs4im"
+
 [autoload]
 
 GlobalParam="*res://core/global_param.gd"
+FmodManager="*uid://cds10pm7hwn3p"
 
 [debug]
 
@@ -40,7 +45,7 @@ import/blender/enabled.android=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/fmod_player/plugin.cfg")
+enabled=PackedStringArray("res://addons/fmod/plugin.cfg", "res://addons/fmod_player/plugin.cfg")
 
 [gui]
 
