@@ -4,6 +4,7 @@ var FPS = round((func(): if DisplayServer.screen_get_refresh_rate() == -1: retur
 var mFPS = round(FPS / 4)
 # Настройки FPS исходя из герцовки монитора или по стандарту.
 
+var audios
 
 var goods = [preload("res://hint.png"), NAN]
 
@@ -41,7 +42,8 @@ var resolutions = [Vector2i(1280, 720), Vector2i(1366,768), Vector2i(1600,900), 
 # Массив с доступными разрешенимями
 var xy_res
 
-var audios
+
+
 
 var bases = [0.3, 
 				false, 
@@ -215,6 +217,7 @@ func _process(delta):
 		leftUPcorner = zero_point
 	if mainWinSize <= max_resolution and screenmode == "оконный":
 		if get_tree().current_scene.name != "setting_up":
+			@warning_ignore("integer_division")
 			DisplayServer.window_set_position((max_resolution / 2) - (mainWinSize / 2))
 	
 	if true:
@@ -366,6 +369,7 @@ func _process(delta):
 		if Input.is_action_just_pressed("upperNUM1"):
 			if max_resolution > resolutions[0]:
 				DisplayServer.window_set_mode(settings[2][2])
+				@warning_ignore("integer_division")
 				DisplayServer.window_set_position((max_resolution / 2) - (resolutions[0] / 2))
 				DisplayServer.window_set_size(resolutions[0])
 			elif max_resolution == resolutions[0]:
@@ -376,6 +380,7 @@ func _process(delta):
 		if Input.is_action_just_pressed("upperNUM2"):
 			if max_resolution > resolutions[1]:
 				DisplayServer.window_set_mode(settings[2][2])
+				@warning_ignore("integer_division")
 				DisplayServer.window_set_position((max_resolution / 2) - (resolutions[1] / 2))
 				DisplayServer.window_set_size(resolutions[1])
 			elif max_resolution == resolutions[1]:
@@ -386,6 +391,7 @@ func _process(delta):
 		if Input.is_action_just_pressed("upperNUM3"):
 			if max_resolution > resolutions[2]:
 				DisplayServer.window_set_mode(settings[2][2])
+				@warning_ignore("integer_division")
 				DisplayServer.window_set_position((max_resolution / 2) - (resolutions[2] / 2))
 				DisplayServer.window_set_size(resolutions[2])
 			elif max_resolution == resolutions[2]:
@@ -396,6 +402,7 @@ func _process(delta):
 		if Input.is_action_just_pressed("upperNUM4"):
 			if max_resolution > resolutions[3]:
 				DisplayServer.window_set_mode(settings[2][2])
+				@warning_ignore("integer_division")
 				DisplayServer.window_set_position((max_resolution / 2) - (resolutions[3] / 2))
 				DisplayServer.window_set_size(resolutions[3])
 			elif max_resolution == resolutions[3]:
@@ -406,6 +413,7 @@ func _process(delta):
 		if Input.is_action_just_pressed("upperNUM5"):
 			if max_resolution > resolutions[4]:
 				DisplayServer.window_set_mode(settings[2][2])
+				@warning_ignore("integer_division")
 				DisplayServer.window_set_position((max_resolution / 2) - (resolutions[4] / 2))
 				DisplayServer.window_set_size(resolutions[4])
 			elif max_resolution == resolutions[4]:
@@ -416,6 +424,7 @@ func _process(delta):
 		if Input.is_action_just_pressed("upperNUM6"):
 			if max_resolution > resolutions[5]:
 				DisplayServer.window_set_mode(settings[2][2])
+				@warning_ignore("integer_division")
 				DisplayServer.window_set_position((max_resolution / 2) - (resolutions[5] / 2))
 				DisplayServer.window_set_size(resolutions[5])
 			elif max_resolution == resolutions[5]:
@@ -426,6 +435,7 @@ func _process(delta):
 		if Input.is_action_just_pressed("upperNUM7"):
 			if max_resolution > resolutions[6]:
 				DisplayServer.window_set_mode(settings[2][2])
+				@warning_ignore("integer_division")
 				DisplayServer.window_set_position((max_resolution / 2) - (resolutions[6] / 2))
 				DisplayServer.window_set_size(resolutions[6])
 			elif max_resolution == resolutions[6]:

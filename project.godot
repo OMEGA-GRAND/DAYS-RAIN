@@ -8,6 +8,10 @@
 
 config_version=5
 
+[Fmod]
+
+General/banks_path="res://FMOD/fmod/Build/Desktop"
+
 [animation]
 
 compatibility/default_parent_skeleton_in_mesh_instance_3d=true
@@ -29,7 +33,6 @@ buses/default_bus_layout="uid://b3brc7l1bs4im"
 [autoload]
 
 GlobalParam="*res://core/global_param.gd"
-FmodManager="*uid://cds10pm7hwn3p"
 
 [debug]
 
@@ -45,7 +48,7 @@ import/blender/enabled.android=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/fmod/plugin.cfg", "res://addons/fmod_player/plugin.cfg")
+enabled=PackedStringArray("res://addons/fmod_player/plugin.cfg")
 
 [gui]
 
